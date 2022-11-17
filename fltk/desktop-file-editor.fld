@@ -1,0 +1,1400 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0303 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include <dirent.h>} {public local
+} 
+
+decl {\#include <iomanip>} {public global
+} 
+
+decl {\#include <string>} {public local
+} 
+
+decl {\#include <iostream>} {public local
+} 
+
+decl {\#include <fstream>} {public local
+} 
+
+decl {\#include <vector>} {public local
+} 
+
+decl {\#include <sys/stat.h>} {public local
+} 
+
+decl {\#include <sys/types.h>} {public local
+} 
+
+decl {\#include <algorithm>} {public local
+} 
+
+decl {\#include <float.h>} {public local
+} 
+
+decl {\#include "../include/fltkfunctions.hpp"} {public global
+} 
+
+decl {\#include <sstream>} {public local
+} 
+
+decl {\#include <FL/Fl_Text_Buffer.H>} {public global
+} 
+
+decl {\#include "../include/common.hpp"} {public global
+} 
+
+class Desktop {open : {public FLTK_FUNCTIONS}
+} {
+  decl {std::string LOCALE_STRING, CURRENT_FILE;} {private local
+  }
+  decl {Fl_Text_Buffer * textBuffer;} {public local
+  }
+  Function {make_window(std::string filePassedIn)} {open
+  } {
+    code {LOCALE_STRING="aa\\nab\\nace\\nach\\naf\\naf_ZA\\naln\\nam\\nan\\nar\\nar_AR\\nary\\nas\\nast\\naz\\nbal\\nbe\\nbe@latin\\nbem\\nbg\\nbg_BG\\nbn\\nbn_IN\\nbo\\nbr\\nbrx\\nbs\\nbyn\\nca\\nca_ES@valencia\\nca@valencia\\nce\\ncgg\\nchr\\nckb\\ncmn\\nco\\ncrh\\ncs\\ncsb\\ncs_CZ\\ncv\\ncy\\nda\\nda_DK\\nde\\nde_CH\\nde_DE\\ndv\\ndz\\nel\\nen\\nen_AU\\nen@boldquot\\nen_CA\\nen_GB\\nen_NZ\\nen@quot\\nen@shaw\\nen_US\\neo\\nes\\nes_AR\\nes_CL\\nes_CO\\nes_CR\\nes_DO\\nes_EC\\nes_ES\\nes_MX\\nes_NI\\nes_PA\\nes_PE\\nes_PR\\nes_SV\\nes_US\\nes_UY\\nes_VE\\net\\neu\\neu_ES\\newo\\nfa\\nfa_AF\\nfa_IR\\nff\\nfi\\nfi_FI\\nfil\\nfo\\nfr\\nfr_CA\\nfr_FR\\nfrp\\nfur\\nfy\\nga\\ngd\\ngez\\ngl\\ngl_ES\\ngu\\ngv\\nha\\nhaw\\nhe\\nhe_IL\\nhi\\nhne\\nhr\\nhr_HR\\nhsb\\nht\\nhu\\nhu_HU\\nhy\\nia\\nid\\nid_ID\\nig\\nilo\\nis\\nit\\nit_IT\\nja\\nja_JP\\njv\\nka\\nkab\\nkk\\nkl\\nkm\\nkm_KH\\nkn\\nko\\nkok\\nko_KR\\nks\\nks_IN\\nku\\nku_IQ\\nkw\\nky\\nla\\nlb\\nlg\\nli\\nln\\nlo\\nlo_LA\\nlt\\nlt_LT\\nlv\\nlv_LV\\nmai\\nmg\\nmhr\\nmi\\nmk\\nmk_MK\\nml\\nml_IN\\nmn\\nmr\\nms\\nms_MY\\nmt\\nmy\\nnah\\nnb\\nnb_NO\\nnds\\nne\\nnhn\\nnl\\nnl_NL\\nnn\\nnn_NO\\nno\\nnqo\\nnso\\noc\\nom\\nor\\nos\\npa\\npam\\npl\\npl_PL\\nps\\npt\\npt_BR\\npt_PT\\nqu\\nrm\\nro\\nro_RO\\nru\\nru_RU\\nrw\\nsa\\nsc\\nsco\\nsd\\nse\\nshn\\nsi\\nsk\\nsk_SK\\nsl\\nsl_SI\\nsma\\nsml\\nsn\\nso\\nsq\\nsr\\nsr@cyrillic\\nsr@ijekavian\\nsr@ijekavianlatin\\nsr@latin\\nsr@Latn\\nsr_RS\\nsr_RS@latin\\nst\\nsv\\nsw\\nszl\\nta\\nta_IN\\nta_LK\\nte\\ntet\\ntg\\nth\\nth_TH\\nti\\ntig\\ntk\\ntl\\ntr\\ntrv\\nts\\ntt\\ntt@iqtelif\\ntt_RU\\nug\\nuk\\nuk_UA\\nur\\nur_PK\\nuz\\nuz@cyrillic\\nuz@Latn\\nve\\nvec\\nvi\\nvi_VN\\nwa\\nwae\\nwal\\nwo\\nxh\\nyi\\nyo\\nzh_CN\\nzh_HK\\nzh_TW\\nzu";
+CURRENT_FILE=filePassedIn;} {}
+    Fl_Window {} {
+      label {Desktop File Editor} open
+      xywh {474 54 410 570} type Double color 47 hide
+      code0 {load(filePassedIn);} xclass {desktop-file-editor}
+    } {
+      Fl_Scroll {} {open
+        xywh {0 0 415 563}
+      } {
+        Fl_Tabs {} {open
+          xywh {5 5 410 460} box FLAT_BOX color 47
+        } {
+          Fl_Group {} {
+            label Normal open
+            xywh {5 30 402 430} box FLAT_BOX selection_color 45
+          } {
+            Fl_Input name {
+              label Name
+              tooltip {Specific name of the application, for example "Mozilla".} xywh {145 50 255 30} box FLAT_BOX labelfont 1
+            }
+            Fl_Input comment {
+              label Comment
+              tooltip {Tooltip for the entry, for example "View sites on the Internet". The value should not be redundant with the values of Name and GenericName.} xywh {145 86 255 31} box FLAT_BOX
+            }
+            Fl_Input tryexec {
+              label TryExec
+              tooltip {Path to an executable file on disk used to determine if the program is actually installed. If the path is not an absolute path, the file is looked up in the $PATH environment variable. If the file is not present or if it is not executable, the entry may be ignored (not be used in menus, for example).} xywh {145 123 255 30} box FLAT_BOX
+            }
+            Fl_Input exec {
+              label Exec
+              tooltip {Program to execute, possibly with arguments. See the Exec key for details on how this key works. The Exec key is required if DBusActivatable is not set to true. Even if DBusActivatable is true, Exec should be specified for compatibility with implementations that do not understand DBusActivatable.} xywh {145 159 255 30} box FLAT_BOX
+            }
+            Fl_Input icon {
+              label Icon
+              tooltip {Icon to display in file manager, menus, etc. If the name is an absolute path, the given file will be used. If the name is not an absolute path, the algorithm described in the Icon Theme Specification will be used to locate the icon.} xywh {145 196 255 30} box FLAT_BOX
+            }
+            Fl_Input type {
+              tooltip {This specification defines 3 types of desktop entries: Application (type 1), Link (type 2) and Directory (type 3). To allow the addition of new types in the future, implementations should ignore desktop entries with an unknown type} xywh {145 232 255 30} box FLAT_BOX
+            }
+            Fl_Input categories {
+              tooltip {Categories in which the entry should be shown in a menu (for possible values see the Desktop Menu Specification).} xywh {145 269 255 30} box FLAT_BOX
+            }
+            Fl_Input notshowin {
+              tooltip {A list of strings identifying the desktop environments that should display/not display a given desktop entry.
+
+By default, a desktop file should be shown, unless an OnlyShowIn key is present, in which case, the default is for the file not to be shown.
+
+If $XDG_CURRENT_DESKTOP is set then it contains a colon-separated list of strings. In order, each string is considered. If a matching entry is found in OnlyShowIn then the desktop file is shown. If an entry is found in NotShowIn then the desktop file is not shown. If none of the strings match then the default action is taken (as above).
+
+The same desktop name may not appear in both OnlyShowIn and NotShowIn of a group.} xywh {145 305 255 30} box FLAT_BOX
+            }
+            Fl_Input onlyshowin {
+              tooltip {A list of strings identifying the desktop environments that should display/not display a given desktop entry.
+
+By default, a desktop file should be shown, unless an OnlyShowIn key is present, in which case, the default is for the file not to be shown.
+
+If $XDG_CURRENT_DESKTOP is set then it contains a colon-separated list of strings. In order, each string is considered. If a matching entry is found in OnlyShowIn then the desktop file is shown. If an entry is found in NotShowIn then the desktop file is not shown. If none of the strings match then the default action is taken (as above).
+
+The same desktop name may not appear in both OnlyShowIn and NotShowIn of a group.} xywh {145 342 255 30} box FLAT_BOX
+            }
+            Fl_Input terminal {
+              tooltip {Whether the program runs in a terminal window.} xywh {145 378 255 30} box FLAT_BOX
+            }
+            Fl_Input nodisplay {
+              tooltip {NoDisplay means "this application exists, but don't display it in the menus". This can be useful to e.g. associate this application with MIME types, so that it gets launched from a file manager (or other apps), without having a menu entry for it (there are tons of good reasons for this, including e.g. the netscape -remote, or kfmclient openURL kind of stuff).} xywh {145 415 255 30} box FLAT_BOX
+            }
+            Fl_Menu_Button {} {
+              label Type open
+              tooltip {This specification defines 3 types of desktop entries: Application (type 1), Link (type 2) and Directory (type 3). To allow the addition of new types in the future, implementations should ignore desktop entries with an unknown type.} xywh {15 232 120 30} box FLAT_BOX down_box FLAT_BOX color 23 selection_color 37 labelfont 1
+            } {
+              MenuItem {} {
+                label Application
+                callback {type->value("Application");
+type->redraw();
+check_type();}
+                tooltip {An application} xywh {15 140 100 20}
+              }
+              MenuItem {} {
+                label Link
+                callback {type->value("Link");
+type->redraw();
+check_type();}
+                tooltip {A URL Link} xywh {15 150 100 20}
+              }
+              MenuItem {} {
+                label Directory
+                callback {type->value("Directory");
+type->redraw();
+check_type();}
+                tooltip {A Directory} xywh {15 160 100 20}
+              }
+              MenuItem {} {
+                label OTHER
+                callback {type->value("");
+type->redraw();
+check_type();}
+                tooltip {Allowing the addition of new types in the future.} xywh {15 170 100 20}
+              }
+            }
+            Fl_Menu_Button cat_Button {
+              label Categories
+              tooltip {Categories in which the entry should be shown in a menu (for possible values see the Desktop Menu Specification).} xywh {15 269 120 30} box FLAT_BOX down_box FLAT_BOX color 23 selection_color 37
+            } {
+              MenuItem {} {
+                label AudioVideo
+                callback {categories->value("AudioVideo");
+categories->redraw();}
+                tooltip {Application for presenting, creating, or processing multimedia (audio/video)} xywh {15 130 100 20}
+              }
+              MenuItem {} {
+                label Development
+                callback {categories->value("Development");
+categories->redraw();}
+                tooltip {An application for development} xywh {15 15 100 20}
+              }
+              MenuItem {} {
+                label Education
+                callback {categories->value("Education");
+categories->redraw();}
+                tooltip {Educational software} xywh {15 15 100 20}
+              }
+              MenuItem {} {
+                label Game
+                callback {categories->value("Game");
+categories->redraw();}
+                tooltip {A game} xywh {15 25 100 20}
+              }
+              MenuItem {} {
+                label Graphics
+                callback {categories->value("Graphics");
+categories->redraw();}
+                tooltip {Application for viewing, creating, or processing graphics} xywh {15 35 100 20}
+              }
+              MenuItem {} {
+                label Network
+                callback {categories->value("Network");
+categories->redraw();}
+                tooltip {Network application such as a web browser} xywh {15 45 100 20}
+              }
+              MenuItem {} {
+                label Office
+                callback {categories->value("Office");
+categories->redraw();}
+                tooltip {An office type application} xywh {15 55 100 20}
+              }
+              MenuItem {} {
+                label Science
+                callback {categories->value("Science");
+categories->redraw();}
+                tooltip {Scientific software} xywh {15 65 100 20}
+              }
+              MenuItem {} {
+                label Settings
+                callback {categories->value("Settings");
+categories->redraw();}
+                tooltip {Settings applications} xywh {15 75 100 20}
+              }
+              MenuItem {} {
+                label System
+                callback {categories->value("System");
+categories->redraw();}
+                tooltip {System application, "System Tools" such as say a log viewer or network monitor} xywh {15 85 100 20}
+              }
+              MenuItem {} {
+                label Utility
+                callback {categories->value("Utility");
+categories->redraw();}
+                tooltip {Small utility application, "Accessories"} xywh {15 95 100 20}
+              }
+            }
+            Fl_Menu_Button nsi_Button {
+              label NotShowIn
+              tooltip {A list of strings identifying the desktop environments that should display/not display a given desktop entry.
+
+By default, a desktop file should be shown, unless an OnlyShowIn key is present, in which case, the default is for the file not to be shown.
+
+If $XDG_CURRENT_DESKTOP is set then it contains a colon-separated list of strings. In order, each string is considered. If a matching entry is found in OnlyShowIn then the desktop file is shown. If an entry is found in NotShowIn then the desktop file is not shown. If none of the strings match then the default action is taken (as above).
+
+The same desktop name may not appear in both OnlyShowIn and NotShowIn of a group.} xywh {15 305 120 30} box FLAT_BOX down_box FLAT_BOX color 23 selection_color 37
+            } {
+              MenuItem {} {
+                label ToriOS
+                callback {NotShowIn("ToriOS");}
+                tooltip {ToriOS Desktop} xywh {15 120 100 20}
+              }
+              MenuItem {} {
+                label GNOME
+                callback {NotShowIn("GNOME");}
+                tooltip {GNOME Desktop} xywh {15 5 100 20}
+              }
+              MenuItem {} {
+                label KDE
+                callback {NotShowIn("KDE");}
+                tooltip {KDE Desktop} xywh {15 5 100 20}
+              }
+              MenuItem {} {
+                label LXDE
+                callback {NotShowIn("LXDE");}
+                tooltip {LXDE Desktop} xywh {15 15 100 20}
+              }
+              MenuItem {} {
+                label MATE
+                callback {NotShowIn("MATE");}
+                tooltip {MATÉ Desktop} xywh {15 25 100 20}
+              }
+              MenuItem {} {
+                label Razor
+                callback {NotShowIn("Razor");}
+                tooltip {Razor-qt Desktop} xywh {15 35 100 20}
+              }
+              MenuItem {} {
+                label ROX
+                callback {NotShowIn("ROX");}
+                tooltip {ROX Desktop} xywh {15 45 100 20}
+              }
+              MenuItem {} {
+                label TDE
+                callback {NotShowIn("TDE");}
+                tooltip {Trinity Desktop} xywh {15 55 100 20}
+              }
+              MenuItem {} {
+                label Unity
+                callback {NotShowIn("Unity");}
+                tooltip {Unity Shell} xywh {15 65 100 20}
+              }
+              MenuItem {} {
+                label XFCE
+                callback {NotShowIn("XFCE");}
+                tooltip {XFCE Desktop} xywh {15 75 100 20}
+              }
+              MenuItem {} {
+                label EDE
+                callback {NotShowIn("EDE");}
+                tooltip {EDE Desktop} xywh {15 85 100 20}
+              }
+              MenuItem {} {
+                label Cinnamon
+                callback {NotShowIn("Cinnamon");}
+                tooltip {Cinnamon Desktop} xywh {15 95 100 20}
+              }
+              MenuItem {} {
+                label Old
+                callback {NotShowIn("Old");}
+                tooltip {Legacy menu systems} xywh {15 105 100 20}
+              }
+            }
+            Fl_Menu_Button osi_Button {
+              label OnlyShowIn
+              tooltip {A list of strings identifying the desktop environments that should display/not display a given desktop entry.
+
+By default, a desktop file should be shown, unless an OnlyShowIn key is present, in which case, the default is for the file not to be shown.
+
+If $XDG_CURRENT_DESKTOP is set then it contains a colon-separated list of strings. In order, each string is considered. If a matching entry is found in OnlyShowIn then the desktop file is shown. If an entry is found in NotShowIn then the desktop file is not shown. If none of the strings match then the default action is taken (as above).
+
+The same desktop name may not appear in both OnlyShowIn and NotShowIn of a group.} xywh {15 342 120 30} box FLAT_BOX down_box FLAT_BOX color 23 selection_color 37
+            } {
+              MenuItem {} {
+                label ToriOS
+                callback {OnlyShowIn("ToriOS");}
+                tooltip {ToriOS Desktop} xywh {15 130 100 20}
+              }
+              MenuItem {} {
+                label GNOME
+                callback {OnlyShowIn("GNOME");}
+                tooltip {GNOME Desktop} xywh {15 15 100 20}
+              }
+              MenuItem {} {
+                label KDE
+                callback {OnlyShowIn("KDE");}
+                tooltip {KDE Desktop} xywh {15 15 100 20}
+              }
+              MenuItem {} {
+                label LXDE
+                callback {OnlyShowIn("LXDE");}
+                tooltip {LXDE Desktop} xywh {15 25 100 20}
+              }
+              MenuItem {} {
+                label MATE
+                callback {OnlyShowIn("MATE");}
+                tooltip {MATÉ Desktop} xywh {15 35 100 20}
+              }
+              MenuItem {} {
+                label Razor
+                callback {OnlyShowIn("Razor");}
+                tooltip {Razor-qt Desktop} xywh {15 45 100 20}
+              }
+              MenuItem {} {
+                label ROX
+                callback {OnlyShowIn("ROX");}
+                tooltip {ROX Desktop} xywh {15 55 100 20}
+              }
+              MenuItem {} {
+                label TDE
+                callback {OnlyShowIn("TDE");}
+                tooltip {Trinity Desktop} xywh {15 65 100 20}
+              }
+              MenuItem {} {
+                label Unity
+                callback {OnlyShowIn("Unity");}
+                tooltip {Unity Shell} xywh {15 75 100 20}
+              }
+              MenuItem {} {
+                label XFCE
+                callback {OnlyShowIn("XFCE");}
+                tooltip {XFCE Desktop} xywh {15 85 100 20}
+              }
+              MenuItem {} {
+                label EDE
+                callback {OnlyShowIn("EDE");}
+                tooltip {EDE Desktop} xywh {15 95 100 20}
+              }
+              MenuItem {} {
+                label Cinnamon
+                callback {OnlyShowIn("Cinnamon");}
+                tooltip {Cinnamon Desktop} xywh {15 105 100 20}
+              }
+              MenuItem {} {
+                label Old
+                callback {OnlyShowIn("Old");}
+                tooltip {Legacy menu systems} xywh {15 115 100 20}
+              }
+            }
+            Fl_Menu_Button term_Button {
+              label Terminal
+              tooltip {Whether the program runs in a terminal window.} xywh {15 378 120 30} box FLAT_BOX down_box FLAT_BOX color 23 selection_color 37
+            } {
+              MenuItem {} {
+                label True
+                callback {terminal->value("True");
+terminal->redraw();}
+                tooltip {Program requires a Terminal} xywh {15 170 100 20}
+              }
+              MenuItem {} {
+                label False
+                callback {terminal->value("False");
+terminal->redraw();}
+                tooltip {Program does NOT require a Terminal} xywh {15 180 100 20}
+              }
+            }
+            Fl_Menu_Button nod_Button {
+              label NoDisplay
+              tooltip {NoDisplay means "this application exists, but don't display it in the menus". This can be useful to e.g. associate this application with MIME types, so that it gets launched from a file manager (or other apps), without having a menu entry for it (there are tons of good reasons for this, including e.g. the netscape -remote, or kfmclient openURL kind of stuff).} xywh {15 415 120 30} box FLAT_BOX down_box FLAT_BOX color 23 selection_color 37
+            } {
+              MenuItem {} {
+                label True
+                callback {nodisplay->value("True");
+nodisplay->redraw();}
+                tooltip {This application exists, but DO NOT display it in the menus} xywh {160 160 100 20}
+              }
+              MenuItem {} {
+                label False
+                callback {nodisplay->value("False");
+nodisplay->redraw();}
+                tooltip {The default (Display the item in menus)} xywh {170 170 100 20}
+              }
+            }
+            Fl_Button icon_display {
+              label ICON
+              callback {std::string iconFILE=choose_an_icon();
+if(iconFILE.compare("")!=0){
+  makeWidgetIcon(iconFILE,o,48);
+  o->copy_label("");
+  icon->value(iconFILE.c_str());
+}}
+              xywh {35 160 65 65} box FLAT_BOX color 23 labelfont 1 align 512
+            }
+          }
+          Fl_Group {} {
+            label Advanced open
+            xywh {10 30 395 430} box FLAT_BOX selection_color 45 hide
+          } {
+            Fl_Input genericname {
+              label GenericName
+              tooltip {Generic name of the application, for example "Web Browser".} xywh {145 40 255 30} box FLAT_BOX
+            }
+            Fl_Input version {
+              label Version
+              tooltip {Version of the Desktop Entry Specification that the desktop entry conforms with. Entries that confirm with this version of the specification should use 1.0. Note that the version field is not required to be present.} xywh {145 75 255 30} box FLAT_BOX
+            }
+            Fl_Input path {
+              label Path
+              tooltip {If entry is of type Application, the working directory to run the program in.} xywh {145 110 255 30} box FLAT_BOX
+            }
+            Fl_Input mime {
+              label MimeType
+              tooltip {The MIME type(s) supported by this application.} xywh {145 145 255 30} box FLAT_BOX
+            }
+            Fl_Input implements {
+              label Implements
+              tooltip {A list of interfaces that this application implements. By default, a desktop file implements no interfaces. See http://standards.freedesktop.org/desktop-entry-spec/latest/ar01s08.html for more information on how this works.} xywh {145 180 255 30} box FLAT_BOX
+            }
+            Fl_Input keywords {
+              label Keywords
+              tooltip {A list of strings which may be used in addition to other metadata to describe this entry. This can be useful e.g. to facilitate searching through entries. The values are not meant for display, and should not be redundant with the values of Name or GenericName.} xywh {145 215 255 30} box FLAT_BOX
+            }
+            Fl_Input wmclass {
+              label StartupWMClass
+              tooltip {If specified, it is known that the application will map at least one window with the given string as its WM class or WM name hint (see the Startup Notification Protocol Specification for more details).} xywh {145 250 255 30} box FLAT_BOX
+            }
+            Fl_Input url {
+              label URL
+              tooltip {If entry is Link type, the URL to access.} xywh {145 285 255 30} box FLAT_BOX labelfont 1
+            }
+            Fl_Input actions {
+              tooltip {Identifiers for application actions. This can be used to tell the application to make a specific action, different from the default behavior. The Application actions section describes how actions work.} xywh {145 320 255 30} box FLAT_BOX deactivate
+            }
+            Fl_Input notify {
+              tooltip {If true, it is KNOWN that the application will send a "remove" message when started with the DESKTOP_STARTUP_ID environment variable set. If false, it is KNOWN that the application does not work with startup notification at all (does not shown any window, breaks even when using StartupWMClass, etc.). If absent, a reasonable handling is up to implementations (assuming false, using StartupWMClass, etc.). (See the Startup Notification Protocol Specification for more details).} xywh {145 355 255 30} box FLAT_BOX
+            }
+            Fl_Input hidden {
+              tooltip {Hidden should have been called Deleted. It means the user deleted (at his level) something that was present (at an upper level, e.g. in the system dirs). It's strictly equivalent to the .desktop file not existing at all, as far as that user is concerned. This can also be used to "uninstall" existing files (e.g. due to a renaming) - by letting make install install a file with Hidden=true in it.} xywh {145 390 255 30} box FLAT_BOX
+            }
+            Fl_Input dbus {
+              tooltip {A boolean value specifying if D-Bus activation is supported for this application. If this key is missing, the default value is false. If the value is true then implementations should ignore the Exec key and send a D-Bus message to launch the application. See D-Bus Activation for more information on how this works. Applications should still include Exec= lines in their desktop files for compatibility with implementations that do not understand the DBusActivatable key.} xywh {145 425 255 30} box FLAT_BOX
+            }
+            Fl_Button {} {
+              label Actions
+              tooltip {Identifiers for application actions. This can be used to tell the application to make a specific action, different from the default behavior. The Application actions section describes how actions work.} xywh {10 320 130 30} box FLAT_BOX color 23 deactivate
+            }
+            Fl_Menu_Button notify_Button {
+              label StartupNotify
+              tooltip {If true, it is KNOWN that the application will send a "remove" message when started with the DESKTOP_STARTUP_ID environment variable set. If false, it is KNOWN that the application does not work with startup notification at all (does not shown any window, breaks even when using StartupWMClass, etc.). If absent, a reasonable handling is up to implementations (assuming false, using StartupWMClass, etc.). (See the Startup Notification Protocol Specification for more details).} xywh {10 355 130 30} box FLAT_BOX down_box FLAT_BOX color 23 selection_color 37
+            } {
+              MenuItem {} {
+                label True
+                callback {notify->value("True");
+notify->redraw();}
+                tooltip {It is KNOWN that the application will send a "remove" message when started with the DESKTOP_STARTUP_ID environment variable set.} xywh {20 150 100 20}
+              }
+              MenuItem {} {
+                label False
+                callback {notify->value("False");
+notify->redraw();}
+                tooltip {It is KNOWN that the application does not work with startup notification at all (does not shown any window, breaks even when using StartupWMClass, etc.)} xywh {20 160 100 20}
+              }
+            }
+            Fl_Menu_Button {} {
+              label Hidden
+              tooltip {Hidden should have been called Deleted. It means the user deleted (at his level) something that was present (at an upper level, e.g. in the system dirs). It's strictly equivalent to the .desktop file not existing at all, as far as that user is concerned. This can also be used to "uninstall" existing files (e.g. due to a renaming) - by letting make install install a file with Hidden=true in it.} xywh {10 390 130 30} box FLAT_BOX down_box FLAT_BOX color 23 selection_color 37
+            } {
+              MenuItem {} {
+                label True
+                callback {hidden->value("True");
+hidden->redraw();}
+                tooltip {It means the user deleted (at his level) something that was present (at an upper level, e.g. in the system dirs). It's strictly equivalent to the .desktop file not existing at all, as far as that user is concerned.} xywh {20 160 100 20}
+              }
+              MenuItem {} {
+                label False
+                callback {hidden->value("False");
+hidden->redraw();}
+                tooltip {The default is not to hide this} xywh {20 170 100 20}
+              }
+            }
+            Fl_Menu_Button {} {
+              label DBusActivatable
+              tooltip {A boolean value specifying if D-Bus activation is supported for this application. If this key is missing, the default value is false. If the value is true then implementations should ignore the Exec key and send a D-Bus message to launch the application. See D-Bus Activation for more information on how this works. Applications should still include Exec= lines in their desktop files for compatibility with implementations that do not understand the DBusActivatable key.} xywh {10 425 130 30} box FLAT_BOX down_box FLAT_BOX color 23 selection_color 37
+            } {
+              MenuItem {} {
+                label True
+                callback {dbus->value("True");
+dbus->redraw();}
+                tooltip {Implementations should ignore the Exec key and send a D-Bus message to launch the application. See D-Bus Activation for more information on how this works.} xywh {170 170 100 20}
+              }
+              MenuItem {} {
+                label False
+                callback {dbus->value("False");
+dbus->redraw();}
+                tooltip {The default is to assume D-Bus activation is not supported} xywh {180 180 100 20}
+              }
+            }
+          }
+          Fl_Group {} {
+            label Locale open
+            tooltip {Configure Locale specific Names} xywh {5 35 395 427} selection_color 45 hide
+          } {
+            Fl_Browser locales_browser {
+              callback {locale_chooser(CURRENT_FILE,true);
+result_locale->select(o->value());}
+              xywh {10 35 120 390} type Hold box FLAT_BOX selection_color 72 when 3
+              code0 {populateBrowserWithString(o,LOCALE_STRING);}
+            }
+            Fl_Browser result_locale {
+              callback {locales_browser->select(o->value());
+locale_chooser(CURRENT_FILE,false);
+locale_value->value(o->text(o->value()));}
+              xywh {135 35 260 390} type Hold box FLAT_BOX selection_color 72
+              code0 {populate_locales(o,CURRENT_FILE);}
+            }
+            Fl_Input locale_value {
+              callback {result_locale->text(result_locale->value(),o->value());}
+              tooltip {Change Locale text} xywh {65 429 330 33} box FLAT_BOX selection_color 80 when 3
+            }
+          }
+          Fl_Group {} {
+            label {Extra Actions} open
+            tooltip {Configure extra Actions} xywh {5 40 401 425} selection_color 45 hide deactivate
+          } {
+            Fl_Box {} {
+              label {TODO!}
+              xywh {145 160 85 40} labelfont 1
+            }
+          }
+        }
+        Fl_Button {} {
+          label OPEN
+          callback {open_file();}
+          tooltip {Open a desktop file} xywh {15 530 80 30} box FLAT_BOX color 23
+        }
+        Fl_Button save_button {
+          label SAVE
+          callback {check_save();
+save_file();}
+          tooltip {Save the current data as a file} xywh {320 530 80 30} box FLAT_BOX color 61 selection_color 59 labelcolor 7
+        }
+        Fl_Input Filename {
+          callback {check_save();}
+          tooltip {The file you want to save (or the name of the current open file)} xywh {50 475 350 30} box FLAT_BOX when 3
+        }
+        Fl_Button {} {
+          label CLEAR
+          callback {clear_all();}
+          tooltip {CLEAR EVERYTHING} xywh {220 530 80 30} box FLAT_BOX color 80 selection_color 72 labelcolor 7
+        }
+        Fl_Button {} {
+          label PREVIEW
+          callback {std::string re=stringfile();
+if(re.compare("")!=0){
+  preview_window(re)->show();
+}}
+          tooltip {Preview text} xywh {115 530 80 30} box FLAT_BOX color 95 selection_color 94 labelcolor 32
+        }
+        Fl_Button {} {
+          callback {std::string message=gettext("Choose a Desktop File");
+std::string pat="*.desktop";
+const char* filer = Filename->value();
+std::string fname="desktop-file-editor.desktop";
+if(filer!=NULL){fname=filer;}
+std::string result =nativeFileDialog(message,fname,pat);
+if(result.compare("")!=0){Filename->value(result.c_str());}}
+          tooltip {Open a desktop file} image {custom_buttons/gear16.png} xywh {10 475 35 30} box FLAT_BOX color 23
+        }
+      }
+    }
+  }
+  Function {preview_window(std::string message)} {open
+  } {
+    Fl_Window preview_win {
+      label Preview open
+      xywh {221 54 465 465} type Double hide
+    } {
+      Fl_Scroll {} {open
+        xywh {10 5 440 410}
+      } {
+        Fl_Text_Editor file_editor {
+          xywh {10 5 440 410} box FLAT_BOX
+          code0 {preview_text(o,message);}
+        }
+      }
+      Fl_Button {} {
+        label SAVE
+        callback {const char* tryin=file_editor->buffer()->text();
+write_out();
+close(preview_win);;}
+        tooltip {Save the current data as a file} xywh {365 425 80 30} box FLAT_BOX color 61 selection_color 58 labelcolor 7
+      }
+      Fl_Button {} {
+        label CLOSE
+        callback {close(preview_win);}
+        xywh {275 425 80 30} box FLAT_BOX color 80 selection_color 72 labelcolor 7
+      }
+    }
+  }
+  Function {activate(Fl_Input* o)} {} {
+    code {o->activate();
+o->color(FL_WHITE);} {}
+  }
+  Function {activate(Fl_Menu_Button* o)} {} {
+    code {o->activate();} {}
+  }
+  Function {check_type()} {} {
+    code {if(isEmpty(type)){show_all();return;}
+activate(type);
+std::string TYPE=type->value();
+if(TYPE.compare("Application")==0){
+  show_apps_only();
+}
+else if(TYPE.compare("Directory")==0){
+  show_dir_only();
+}
+else if(TYPE.compare("Link")==0){
+  show_link_only();
+}
+else{
+  show_all();
+}} {}
+  }
+  Function {choose_directory()} {return_type {std::string}
+  } {
+    code {std::string message=gettext("Choose a Directory");
+const char* fname=getenv("PWD");
+if (fname == NULL){
+  fname=getenv("XDG_CONFIG_HOME");
+  if (fname == NULL){fname=getenv("HOME");}
+  else{
+    std::string autostart=fname;
+    autostart+="/autostart/";
+    fname=autostart.c_str();
+  }
+}
+std::string RESULT=choose_a_directory(fname,message);
+return RESULT;} {}
+  }
+  Function {clear_all()} {} {
+    code {//normal
+clear_input(name);
+clear_input(exec);
+clear_input(tryexec);
+clear_input(comment);
+clear_input(icon);
+clear_input(type);
+clear_input(categories);
+clear_input(notshowin);
+clear_input(onlyshowin);
+clear_input(terminal);
+clear_input(nodisplay);
+//advanced
+clear_input(genericname);
+clear_input(version);
+clear_input(path);
+clear_input(mime);
+clear_input(implements);
+clear_input(keywords);
+clear_input(wmclass);
+clear_input(url);
+clear_input(actions);
+clear_input(notify);
+clear_input(hidden);
+clear_input(dbus);
+clear_input(Filename);
+show_all();} {}
+  }
+  Function {clear_input(Fl_Input *o)} {} {
+    code {o->value("");
+o->redraw();} {}
+  }
+  Function {close(Fl_Double_Window* o)} {} {
+    code {o->hide();} {}
+  }
+  Function {DEactivate(Fl_Input* o)} {} {
+    code {o->deactivate();
+o->color(FL_LIGHT2);
+o->value("");} {}
+  }
+  Function {DEactivate(Fl_Menu_Button* o)} {} {
+    code {o->deactivate();} {}
+  }
+  Function {get_line(std::string filename, std::string line)} {return_type {std::string}
+  } {
+    code {std::string thisLine = linuxcommon::get_line_with_equal(filename,line);
+return thisLine;} {}
+  }
+  Function {isEmpty(Fl_Input *o)} {return_type bool
+  } {
+    code {const char* charVal= o->value();
+if ( charVal == NULL){
+  make_red(o);
+  return true;
+}
+std::string STRINGval=o->value();
+if (STRINGval.compare("")==0){
+  make_red(o);
+  return true;
+}
+make_white(o);
+return false;} {}
+  }
+  Function {keyWords(std::string filename)} {return_type {std::string}
+  } {
+    code {std::string GenericName = get_line("GenericName=",filename);
+std::string Keywords = get_line("Keywords=",filename);
+std::string result;
+if(GenericName.compare("")!=0){result=GenericName;}
+if(Keywords.compare("")!=0){result+=Keywords;}
+if(result.compare("")==0){result="none";}
+return result;} {}
+  }
+  Function {load(std::string result)} {open
+  } {
+    code {if(result.compare("")!=0){
+  std::string tmp=linuxcommon::process_filename(result);
+  result=tmp;
+  std::cout<<"POST PROCESSED FILE="<<result<<std::endl;
+  populate(result);
+  Filename->value(tmp.c_str());
+  if(!linuxcommon::file_is_writable(result)){save_button->deactivate();}
+  else{save_button->activate();}
+}
+check_type();
+check_save();} {}
+  }
+  Function {locale_chooser(std::string filename, bool getval)} {open
+  } {
+    code {std::string tmp="";
+if(getval){
+  tmp=name_locale_line(filename,locales_browser);
+}
+locale_value->copy_label("                 ");
+locale_value->copy_label(locales_browser->text(locales_browser->value()));
+locale_value->value(tmp.c_str());
+if(tmp.compare("")!=0){
+  result_locale->text(locales_browser->value(),tmp.c_str());
+  result_locale->redraw();
+}} {}
+  }
+  Function {make_red(Fl_Input *o)} {} {
+    code {o->color(FL_RED);
+o->redraw();} {}
+  }
+  Function {make_white(Fl_Input *o)} {} {
+    code {o->color(FL_WHITE);
+o->redraw();} {}
+  }
+  Function {not_showin(std::string filename)} {return_type bool
+  } {
+    code {char* desktop = getenv("XDG_CURRENT_DESKTOP");
+char* desktop_session = getenv("DESKTOP_SESSION");
+std::string result = get_line("NotShowIn=",filename);
+unsigned int found = 0;
+if(result.compare("")==0){
+  return false;
+}
+std::transform(result.begin(),result.end(),result.begin(),::tolower);
+std::string temp1,temp2;
+temp2=result;
+for(unsigned int i = 0; i<result.length();i++){
+  found = temp2.find_first_of(';');
+  if(found < temp2.length()){
+    temp2=temp2.erase(found,temp2.length());
+    temp1 = result.erase(0,found+1);
+  if (desktop !=NULL){
+    //std::cout<<"desktop: "<<desktop<<"\\nresult: "<<temp2<<std::endl;
+    if (temp2.compare(desktop)==0){
+    return true;
+    }
+  }
+  if (desktop_session !=NULL){
+    //std::cout<<"desktop session: "<<desktop_session<<"\\nresult: "<<temp2<<std::endl;
+    if (temp2.compare(desktop_session)==0){
+    return true;
+    }
+  }
+    temp2=temp1;
+  }
+}
+return false;} {}
+  }
+  Function {name_line(std::string filename)} {return_type {std::string}
+  } {
+    code {std::string base_lang,result,strlang,strlanguage,startbase,NAME,LOCALNAME,LOCALEND;
+NAME="Name";
+LOCALNAME="Name[";
+LOCALEND="]=";
+unsigned int underscore = 0;
+char* lang = getenv("LANG");
+char* language = getenv("LANGUAGE");
+if(lang!=NULL)strlang = lang;
+if(language!=NULL)strlanguage =language;
+if (strlanguage.compare("")!=0){  
+  result=get_line(filename, (LOCALNAME+ strlanguage + LOCALEND));
+  if(result.compare("")!=0){return result;}
+  base_lang=strlanguage;
+}
+else{
+  if (strlang.compare("")!=0){
+      unsigned int dot = 0;
+      dot=strlang.find('.');
+      if(dot<strlang.length())
+        startbase=strlang.erase(dot,strlang.length());
+      result=get_line(filename, (LOCALNAME+ startbase + LOCALEND));
+      if(result.compare("")!=0){return result;}
+      base_lang=startbase;
+   }
+   else{return get_line(filename,"Name=");}
+}
+underscore=base_lang.find('_');
+if(underscore<base_lang.length())
+  base_lang=base_lang.erase(underscore,base_lang.length());
+result=get_line( filename,(LOCALNAME+ base_lang + LOCALEND));
+if(result.compare("")!=0){return result;}
+return get_line(filename,"Name=");} {}
+  }
+  Function {name_locale_line(std::string filename,Fl_Browser *o)} {open return_type {std::string}
+  } {
+    code {//errorOUT(filename);
+if(!checkFlBrowserItem(o)){return "";}
+std::string LANG=o->text(o->value());
+return no_browser_name_locale(filename,LANG);} {}
+  }
+  Function {no_browser_name_locale(std::string filename, std::string LANG)} {open return_type {std::string}
+  } {
+    code {std::string result,LOCALNAME,LOCALEND;
+LOCALNAME="Name[";
+LOCALEND="]=";
+std::string testing=LOCALNAME+ LANG + LOCALEND;
+result=get_line(filename, testing);
+//errorOUT(testing+" "+result);
+if(result.compare("")!=0){return result;}
+else{
+  testing=LOCALNAME+ LANG;
+  result=get_line(filename, testing);
+  //errorOUT(testing+" "+result);
+  if(result.compare("")!=0){return result;}
+}
+return "";} {}
+  }
+  Function {no_display(std::string filename)} {return_type bool
+  } {
+    code {std::string result = get_line(filename,"NoDisplay=");
+if(result.compare("")==0){
+  return false;
+}
+std::transform(result.begin(),result.end(),result.begin(),::tolower);
+if (result.compare("true")==0){return true;}
+else{return false;}
+
+return false;} {}
+  }
+  Function {NotShowIn(const char* DE)} {} {
+    code {if(DE==NULL){return;}
+if(!isEmpty(onlyshowin)){
+  std::string ONLY = onlyshowin->value();
+  unsigned int finder = 0;
+  finder=ONLY.find(DE);
+  if(finder<ONLY.length()){
+    make_red(onlyshowin);
+    make_red(notshowin);
+    return;
+  }
+}
+notshowin->value(DE);
+notshowin->redraw();} {}
+  }
+  Function {only_show(std::string filename)} {return_type bool
+  } {
+    code {char* desktop = getenv("XDG_CURRENT_DESKTOP");
+char* desktop_session = getenv("DESKTOP_SESSION");
+std::string result = get_line("OnlyShowIn=",filename);
+unsigned int found = 0;
+if(result.compare("")==0){
+//Only show in line doesn't exist
+  return true;
+}
+//std::cout<<"OnlyShowIn="<<result<<std::endl;
+//compare lower case words only
+std::transform(result.begin(),result.end(),result.begin(),::tolower);
+
+std::string temp1,temp2;
+temp2=result;
+
+for(unsigned int i = 0; i<result.length();i++){
+  found = temp2.find_first_of(';');
+  if(found < temp2.length()){
+    temp2=temp2.erase(found,temp2.length());
+    temp1 = result.erase(0,found+1);
+    if (desktop !=NULL){
+      //std::cout<<"desktop: "<<desktop<<"\\nresult: "<<temp2<<std::endl;
+      if (temp2.compare(desktop)==0){return true;}
+    }
+    if (desktop_session !=NULL){
+     // std::cout<<"desktop session: "<<desktop_session<<"\\nresult: "<<temp2<<std::endl;
+      if(temp2.compare(desktop_session)==0){return true;}
+    }
+    if (temp2.compare("unity")==0){return true;}
+    temp2=temp1;
+   }
+   else{
+     
+   }
+}
+return false;} {}
+  }
+  Function {OnlyShowIn(const char* DE)} {} {
+    code {if(DE==NULL){return;}
+if(!isEmpty(notshowin)){
+  std::string ONLY = notshowin->value();
+  unsigned int finder = 0;
+  finder=ONLY.find(DE);
+  if(finder<ONLY.length()){
+    make_red(onlyshowin);
+    make_red(notshowin);
+    return;
+  }
+}
+onlyshowin->value(DE);
+onlyshowin->redraw();} {}
+  }
+  Function {open_file()} {open
+  } {
+    code {std::string message=gettext("Choose a Desktop File");
+std::string pat="*.desktop";
+const char* filer = Filename->value();
+std::string fname="desktop-file-editor.desktop";
+if(filer!=NULL){fname=filer;}
+std::string result =nativeFileDialog(message,fname,pat);
+load(result);} {}
+  }
+  Function {populate(std::string fileName)} {} {
+    code {//if(!linuxcommon::test_file(fileName)){return;}
+if(fileName.compare("")==0){return;}
+std::string filename=fileName; 
+std::string NAME,EXEC,CATS,TYPE,ICON,COMMENT,ONLY,NOT,URL,WMCLASS,KEYWORDS,IMPLEMENTS,VERSION,ENCODING,PATH,MIME,TRY,GENERIC,NODISPLAY,TERMINAL,STARTUPNOTIFY,HIDDEN,DBUS;
+
+TYPE=get_line(filename,"Type=");
+VERSION=get_line(filename,"Version=");
+NAME=name_line(filename);
+GENERIC=get_line(filename,"GenericName=");
+
+COMMENT=get_line(filename,"Comment=");
+ICON=get_line(filename,"Icon=");
+if(ICON.compare("")!=0){
+  icon_display->copy_label("");
+  makeWidgetIcon(ICON,icon_display,48);
+}
+ONLY=get_line(filename,"OnlyShowIn=");
+NOT=get_line(filename,"NotShowIn=");
+TRY=get_line(filename,"TryExec=");
+EXEC=get_line(filename,"Exec=");
+PATH=get_line(filename,"Path=");
+//Actions....
+MIME=get_line(filename,"MimeType");
+CATS=get_line(filename,"Categories=");
+IMPLEMENTS=get_line(filename,"Implements=");
+KEYWORDS=get_line(filename,"Keywords=");
+WMCLASS=get_line(filename,"StartupWMClass=");
+URL=get_line(filename,"URL=");
+MIME=get_line(filename,"MimeType");
+STARTUPNOTIFY=get_line(filename,"StatupNotify=");
+TERMINAL=get_line(filename,"Terminal=");
+NODISPLAY=get_line(filename,"NoDisplay=");
+DBUS=get_line(filename,"DBusActivatable=");
+HIDDEN=get_line(filename,"Hidden=");
+//extras
+ENCODING=get_line(filename,"Encoding=");
+//Setup
+set_input(name,NAME);
+set_input(genericname,GENERIC);
+set_input(exec,EXEC);
+set_input(comment,COMMENT);
+set_input(icon,ICON);
+set_input(tryexec,TRY);
+set_input(categories,CATS);
+set_input(onlyshowin,ONLY);
+set_input(type,TYPE);
+set_input(version,VERSION);
+set_input(path,PATH);
+set_input(implements,IMPLEMENTS);
+set_input(keywords,KEYWORDS);
+set_input(wmclass,WMCLASS);
+set_input(url,URL);
+set_input(mime,MIME);
+set_input(notify,STARTUPNOTIFY);
+set_input(nodisplay,NODISPLAY);
+set_input(terminal,TERMINAL);
+set_input(hidden,HIDDEN);
+set_input(dbus,DBUS);
+check_type();} {}
+  }
+  Function {check_file()} {open return_type bool
+  } {
+    code {std::string testFilename;
+if (isEmpty(Filename)){
+  make_red(Filename);
+  return false;
+}
+const char* filer = Filename->value();
+testFilename=filer;
+unsigned int found = 0;
+found=testFilename.find(".desktop");
+if (found > testFilename.length()){
+  make_red(Filename);
+  testFilename += ".desktop";
+  Filename->value(testFilename.c_str());
+  Filename->redraw();
+  
+}
+found = 0;
+found= testFilename.find("/");
+if(found>testFilename.length()){
+  std::string choice=choose_directory();
+  if(choice.compare("")==0){
+    make_red(Filename);
+    return false;
+  }
+  choice+="/";
+  choice+=testFilename;
+  testFilename=choice;
+}
+Filename->value(testFilename.c_str());
+Filename->redraw();
+return true;} {}
+  }
+  Function {set_input(Fl_Input *o, std::string val)} {} {
+    code {make_white(o);
+o->value(val.c_str());
+o->redraw();} {}
+  }
+  Function {show_all()} {} {
+    code {activate(tryexec);
+activate(exec);
+activate(path);
+activate(terminal);
+activate(actions);
+activate(categories);
+activate(keywords);
+activate(notify);
+activate(wmclass);
+activate(mime);
+activate(url);
+activate(cat_Button);
+activate(notify_Button);
+activate(term_Button);} {}
+  }
+  Function {show_apps_only()} {} {
+    code {activate(tryexec);
+activate(exec);
+activate(path);
+activate(terminal);
+activate(actions);
+activate(categories);
+activate(keywords);
+activate(notify);
+activate(wmclass);
+activate(mime);
+activate(cat_Button);
+activate(notify_Button);
+activate(term_Button);
+DEactivate(url);} {}
+  }
+  Function {show_dir_only()} {} {
+    code {DEactivate(tryexec);
+DEactivate(exec);
+DEactivate(path);
+DEactivate(terminal);
+DEactivate(term_Button);
+DEactivate(actions);
+DEactivate(categories);
+DEactivate(cat_Button);
+DEactivate(keywords);
+DEactivate(notify);
+DEactivate(notify_Button);
+DEactivate(wmclass);
+DEactivate(mime);
+DEactivate(url);} {}
+  }
+  Function {show_link_only()} {} {
+    code {DEactivate(tryexec);
+DEactivate(exec);
+DEactivate(path);
+DEactivate(terminal);
+DEactivate(term_Button);
+DEactivate(actions);
+DEactivate(categories);
+DEactivate(cat_Button);
+DEactivate(keywords);
+DEactivate(notify);
+DEactivate(notify_Button);
+DEactivate(wmclass);
+DEactivate(mime);
+activate(url);} {}
+  }
+  Function {stringfile()} {open return_type {std::string}
+  } {
+    code {const char* FILENAME=Filename->value();
+if(FILENAME==NULL){std::cerr<<"Filename is NULL"<<std::endl;}
+if(isEmpty(Filename)){
+  make_red(Filename);
+  return "";
+}
+else{make_white(Filename);}
+const char* NAME = name->value();
+if(NAME==NULL){std::cerr<<"Name is NULL"<<std::endl;}
+if(isEmpty(name)){
+  make_red(name);
+  return "";
+}
+else{make_white(name);}
+const char* TYPE = type->value();
+if(TYPE==NULL){std::cerr<<"Type is NULL"<<std::endl;}
+if (isEmpty(type)){
+  make_red(type);
+  return "";
+}
+else{make_white(type);}
+std::string TypeOf=type->value(); 
+std::string fileContents="[Desktop Entry]\\n";
+fileContents+=testValue("Type=",type);
+fileContents+=testValue("Version=",version);
+fileContents+=testValue("Name=",name);
+fileContents+=locales_string();
+fileContents+=testValue("GenericName=",genericname);
+if (TypeOf.compare("Application")==0){
+  const char* EXEC = exec->value();
+  if(EXEC==NULL){std::cerr<<"Executable is NULL"<<std::endl;}
+  if (isEmpty(exec)){
+    make_red(exec);
+    return "";
+  }
+  fileContents+=testValue("Exec=",exec);
+  fileContents+=testValue("TryExec=",tryexec);
+  fileContents+=testValue("Terminal=", terminal);
+  fileContents+=testValue("Categories=",categories);
+  fileContents+=testValue("Path=",path);
+  fileContents+=testValue("MimeType=",mime);
+  fileContents+=testValue("Keywords=",keywords);
+  fileContents+=testValue("StartUpWMClass=",wmclass);
+  fileContents+=testValue("StartupNotify=",notify);
+}
+fileContents+=testValue("Comment=",comment);
+fileContents+=testValue("Icon=",icon);
+fileContents+=testValue("NoDisplay=",nodisplay);
+fileContents+=testValue("Hidden=", hidden);
+fileContents+=testValue("DBusActivatable=",dbus);
+fileContents+=testValue("Implements=",implements);
+
+//TODO test OnlyShowIn and NotShowIn to not have the same values ever
+fileContents+=testValue("NotShowIn=",notshowin);
+fileContents+=testValue("OnlyShowIn=",onlyshowin);
+
+if (TypeOf.compare("Link")==0){
+  std::string linktext=testValue("URL=",url);
+  if(linktext.compare("")==0){
+    make_red(url);
+    return "";
+  }
+  fileContents+=linktext;
+}
+  
+return fileContents;} {}
+  }
+  Function {termie_out(std::string terminal_Command_You_Want_Output_From)} {return_type {std::string}
+  } {
+    code {return linuxcommon::term_out(terminal_Command_You_Want_Output_From);} {}
+  }
+  Function {testValue(std::string TEXT, Fl_Input* o)} {return_type {std::string}
+  } {
+    code {std::string fileContents;
+const char* tempval=o->value();
+if (tempval==NULL){return "";}
+std::string TEMPval=o->value();
+if(TEMPval.compare("")==0){return "";}
+fileContents+=TEXT;
+fileContents+=TEMPval;
+fileContents+="\\n";
+return fileContents;} {}
+  }
+  Function {write_out()} {open
+  } {
+    code {const char* FILENAME=Filename->value();
+std::string fileContents=stringfile();
+if(!linuxcommon::save_string_to_file(fileContents,FILENAME)){
+  error_win->show();
+  linuxcommon::echo_error("Did not save the file correctly");
+}} {}
+  }
+  Function {save_file()} {open
+  } {
+    code {if(check_file()){
+  std::string fileContents=stringfile();
+  preview_window(fileContents)->show();
+}} {}
+  }
+  Function {save_error()} {} {
+    Fl_Window error_win {
+      label {Save Error} open
+      xywh {657 237 270 90} type Double hide
+    } {
+      Fl_Output {} {
+        label {There was an error saving the file:}
+        tooltip {Make sure you have permission to save.} xywh {5 25 255 25} box FLAT_BOX align 1
+        code0 {o->value(Filename->value());}
+      }
+      Fl_Button {} {
+        label OK
+        callback {close(error_win);}
+        xywh {195 55 60 25} box FLAT_BOX color 62 selection_color 60 labelcolor 7
+      }
+      Fl_Button {} {
+        label {?}
+        callback {help_window()->show();
+get_help(help_browser);}
+        xywh {130 55 40 25} box FLAT_BOX color 219 selection_color 176 labelfont 1 labelsize 17 labelcolor 7
+      }
+    }
+  }
+  Function {help_window()} {} {
+    Fl_Window help_win {
+      label Help open
+      xywh {52 102 280 280} type Double hide
+    } {
+      Fl_Button {} {
+        label CLOSE
+        callback {close(help_win);}
+        xywh {210 245 60 25} box FLAT_BOX color 80 selection_color 64 labelcolor 7
+      }
+      Fl_Browser help_browser {
+        xywh {15 5 255 230} box FLAT_BOX
+      }
+    }
+  }
+  Function {get_help(Fl_Browser *o)} {} {
+    code {const char* lang=getenv("LANG");
+if(lang==NULL)lang=getenv("LANGUAGE");
+else{
+  std::string tmp=lang;
+  unsigned int finder=tmp.find('.');
+  if(finder<tmp.length()){tmp=tmp.erase(finder,std::string::npos);}
+  lang=tmp.c_str();
+}
+if(lang==NULL)lang="en_US";
+std::string helpfile="/jwm-settings-manager/help-desktop-file-editor-";
+helpfile+=lang;
+std::string fullfile=linuxcommon::test_file_in_vector_path(helpfile,linuxcommon::desktop_dirs());
+if(linuxcommon::test_file(fullfile)){
+  populateBrowserWithTextFile(o,fullfile);
+}
+else{
+  fullfile="If you have trouble saving your file, ensure that you are able to save in the directory.  You may need to reopen the program as administrator by running:\\n\\npkexec desktop-file-editor";
+  populateBrowserWithString(o,fullfile);
+}} {}
+  }
+  Function {populate_locales(Fl_Browser *o,std::string filename)} {open
+  } {
+    code {std::vector<std::string> STRING_VEC=linuxcommon::delimiter_vector_from_string(LOCALE_STRING,"\\n");
+for( std::vector<std::string>::iterator it = STRING_VEC.begin();
+ it!=STRING_VEC.end();
+ ++it){
+  std::string tmp=*it;  
+  std::string res=no_browser_name_locale(filename,tmp);
+  o->add(res.c_str());
+}
+o->redraw();} {}
+  }
+  Function {locales_string()} {open return_type {std::string}
+  } {
+    code {std::string result;
+for(int i=1;i<=result_locale->size();i++){
+  std::string LINE="Name[";
+  std::string thisLine; 
+    std::string thisLocale;
+  const char* tmpr=result_locale->text(i);
+  if(tmpr!=NULL){
+    const char* ltemp=locales_browser->text(i);
+    if(ltemp!=NULL){
+      thisLocale=ltemp;
+      std::string tmp=tmpr;
+      if(tmp.compare("")!=0){
+        thisLine=LINE+thisLocale+"]="+tmp;
+        errorOUT(thisLine);
+        result=result+"\\n"+thisLine;
+      }
+    }
+  }
+}
+return result;} {}
+  }
+  Function {preview_text(Fl_Text_Display *o,std::string TEXT)} {open
+  } {
+    code {if(TEXT.compare("")==0)return;
+int tmp=TEXT.length();
+Fl_Text_Buffer *buf=new Fl_Text_Buffer(tmp);
+buf->text(TEXT.c_str());
+o->buffer(buf);} {}
+  }
+  Function {write_out(const char* txt)} {open
+  } {
+    code {const char* FILENAME=Filename->value();
+if(txt==NULL)return;
+if(FILENAME==NULL)return;
+std::string fileContents=txt;
+if(!linuxcommon::save_string_to_file(fileContents,FILENAME)){
+  error_win->show();
+  linuxcommon::echo_error("Did not save the file correctly");
+}} {}
+  }
+  Function {check_save()} {open
+  } {
+    code {const char* res=Filename->value();
+std::string result;
+if(res!=NULL){result=res;}
+std::string tmpRES=linuxcommon::translate_home(result);
+if(tmpRES.compare(result)!=0){
+  Filename->value(tmpRES.c_str());
+}
+if(!linuxcommon::file_is_writable(result)){
+  save_button->deactivate();
+  unsigned int color=linuxcommon::get_fl_color("\#006900");
+  save_button->color(color);
+}
+else{
+  unsigned int color=linuxcommon::get_fl_color("\#00b600");
+  save_button->color(color);  
+  save_button->activate();
+  
+}
+save_button->redraw();} {}
+  }
+} 
+
+Function {main(int argc, char *argv[])} {open return_type int
+} {
+  code {std::string command;
+try{
+  //integers for searching the argv
+  if(argc>0){
+    for(int i=1;i<argc;++i){
+      command=argv[i];
+      for(int i=0;i<argc;i++){
+        std::string tmp=linuxcommon::process_filename(command);
+        if(tmp.compare("")!=0)command=tmp;
+        if(linuxcommon::test_file(command)){
+          Desktop D;
+          std::cout<<"Command argument:"<<command<<std::endl;
+          D.make_window(command)->show();
+          return Fl::run();
+        }
+      }
+    }
+  }
+  Desktop D;
+  D.make_window("")->show();
+  return Fl::run();
+}
+catch (const std::exception& e){
+  std::cerr << "Unhandled exception:\\n" << e.what() << std::endl;
+  return EXIT_FAILURE;
+}
+catch (...){
+  std::cerr << "Unknown exception!" << std::endl;
+  return EXIT_FAILURE;
+}} {selected
+  }
+} 

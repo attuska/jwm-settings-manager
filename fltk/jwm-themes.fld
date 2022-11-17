@@ -1,0 +1,170 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0303 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
+header_name {.h} 
+code_name {.cxx}
+comment {/*                 Joe's Window Manager Configuration
+ *
+ * This program configures JWM using pugixml and FLTK
+ *
+ *         Copyright (C) 2016  Israel <israeldahl@gmail.com>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This has been developed as a part of the ToriOS Project
+ *
+ *
+ * You may redistribute this, but you must keep this comment in place
+ * Jesus is my Lord, and if you don't like it feel free to ignore it.
+ */} {in_source in_header
+} 
+
+decl {\#include <libintl.h>} {public global
+} 
+
+decl {\#include <string>} {public global
+} 
+
+decl {\#include <stdlib.h>} {public global
+} 
+
+decl {\#include <iostream>} {public global
+} 
+
+decl {\#include "../include/jwmrc.hpp"} {public global
+} 
+
+decl {\#include "../include/themes.hpp"} {public global
+} 
+
+decl {\#include "../include/ui.hpp"} {selected public global
+} 
+
+decl {\#include "../data/icons/jsm-theme.xpm"} {public global
+} 
+
+class ThemesUI {open : {public Theme}
+} {
+  Function {make_window()} {open
+  } {
+    Fl_Window themes_window {
+      label Themes open
+      xywh {619 259 590 300} type Double color 47 labelcolor 7 hide
+      code0 {startup(o,jsm_theme_xpm);} xclass {jsm-theme}
+    } {
+      Fl_Scroll {} {open
+        xywh {0 0 585 295} color 31
+      } {
+        Fl_Button ok {
+          label {Change Colors ONLY}
+          callback {const char* result = current_theme->value();
+if(result!=NULL){
+  std::string temp=result;
+  change_theme(temp,false);
+}}
+          tooltip {This will copy your current theme somewhere else} xywh {380 162 195 30} box FLAT_BOX color 61 selection_color 58 labelcolor 7
+        }
+        Fl_Browser sys_theme {
+          label Themes
+          callback {std::string filename=theme_cb(o, true,current_theme);
+if(usr_theme->value()>0)
+  usr_theme->select(usr_theme->value(),0);
+updateTheme(o,button,button_icon,tray,awin,awin2,awin_text,iwin,iwin2,iwin_text,amin,amax,aclose,imin,imax,iclose,filename,false);}
+          tooltip {All the installed system themes} xywh {15 20 130 105} type Hold box FLAT_BOX selection_color 72 align 1
+          code1 {populateThemes(o);}
+        }
+        Fl_Box button_icon {
+          xywh {150 20 45 40} box FLAT_BOX color 23
+        }
+        Fl_Box button {
+          label Button
+          xywh {195 20 75 40} box FLAT_BOX color 23
+        }
+        Fl_Box tray {
+          label Panel
+          xywh {270 20 305 40} box FLAT_BOX color 23
+        }
+        Fl_Box awin2 {
+          xywh {150 77 425 30} box FLAT_BOX color 23
+        }
+        Fl_Box awin {
+          xywh {150 67 425 40} box FLAT_BOX color 23
+        }
+        Fl_Box awin_text {
+          label {Window (Active)}
+          xywh {150 67 425 40} color 23
+        }
+        Fl_Box amin {
+          xywh {480 72 30 30} color 23
+        }
+        Fl_Box amax {
+          xywh {510 72 30 30} color 23
+        }
+        Fl_Box aclose {
+          xywh {540 72 30 30} color 23
+        }
+        Fl_Box iwin {
+          xywh {150 115 425 40} box FLAT_BOX color 23
+        }
+        Fl_Box iwin2 {
+          xywh {150 125 425 30} box FLAT_BOX color 23
+        }
+        Fl_Box iwin_text {
+          label {Window (Inactive)}
+          xywh {150 115 425 40} color 23
+        }
+        Fl_Box imin {
+          xywh {480 120 30 30} color 23
+        }
+        Fl_Box imax {
+          xywh {510 120 30 30} color 23
+        }
+        Fl_Box iclose {
+          xywh {540 120 30 30} color 23
+        }
+        Fl_Button save_button {
+          label {Save Custom Theme}
+          callback {save_theme(usr_theme);}
+          tooltip {This will copy your current theme somewhere else} xywh {155 162 160 30} box FLAT_BOX color 94
+        }
+        Fl_Button cancel_button {
+          label Cancel
+          callback {cancel();}
+          tooltip {This will copy your current theme somewhere else} xywh {205 200 65 33} box FLAT_BOX color 80 selection_color 64 labelcolor 7
+        }
+        Fl_Browser usr_theme {
+          label {User Themes}
+          callback {std::string filename=theme_cb(o, false,current_theme);
+if(sys_theme->value()>0)
+  sys_theme->select(sys_theme->value(),0);
+updateTheme(o,button,button_icon,tray,awin,awin2,awin_text,iwin,iwin2,iwin_text,amin,amax,aclose,imin,imax,iclose,filename,true);}
+          tooltip {This contains all the themes in ~/.themes which MAY NOT be JWM themes} xywh {15 145 130 140} type Hold box FLAT_BOX selection_color 72 align 1
+          code1 {populateUserThemes(o);}
+        }
+        Fl_Button overwritten {
+          label {Overwrite Current Theme}
+          callback {const char* result = current_theme->value();
+if(result!=NULL){
+  std::string temp=result;
+  change_theme(temp,true);
+}}
+          tooltip {This will copy your current theme somewhere else} xywh {380 200 195 35} box FLAT_BOX color 61 selection_color 58 labelcolor 7
+        }
+        Fl_Input current_theme {
+          xywh {160 255 415 30} box FLAT_BOX selection_color 80
+        }
+      }
+    }
+  }
+} 

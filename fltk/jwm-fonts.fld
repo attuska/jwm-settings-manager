@@ -1,0 +1,662 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0303 
+i18n_type 1 
+i18n_include <libintl.h> 
+i18n_function gettext 
+header_name {.h} 
+code_name {.cxx}
+comment {/*                 Joe's Window Manager Configuration
+ *
+ * This program configures JWM using pugixml and FLTK
+ *
+ *         Copyright (C) 2016  Israel <israeldahl@gmail.com>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This has been developed as a part of the ToriOS Project
+ *
+ *
+ * You may redistribute this, but you must keep this comment in place
+ * Jesus is my Lord, and if you don't like it feel free to ignore it.
+ */} {in_source in_header
+} 
+
+decl {\#include <libintl.h>} {public global
+} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {public global
+} 
+
+decl {\#include <string>} {public global
+} 
+
+decl {\#include <stdlib.h>} {public global
+} 
+
+decl {\#include <iostream>} {public global
+} 
+
+decl {\#include <FL/Fl_Color_Chooser.H>} {public global
+} 
+
+decl {\#include "../include/jwmrc.hpp"} {public global
+} 
+
+decl {\#include "../include/ui.hpp"} {selected public global
+} 
+
+decl {\#include "../include/fonts.hpp"} {public global
+} 
+
+decl {\#include "../data/icons/jsm-fonts.xpm"} {public global
+} 
+
+class FontUI {open : {public JSM_Fonts}
+} {
+  decl {std::string currentElement} {private local
+  }
+  decl {Fl_Output* Widget} {private local
+  }
+  Function {make_window()} {open
+  } {
+    code {load();} {}
+    Fl_Window font_window {
+      label {Font Settings} open
+      xywh {920 135 280 335} type Double color 47 hide resizable
+      code0 {startup(o,jsm_fonts_xpm);} xclass {jsm-fonts}
+    } {
+      Fl_Scroll {} {open
+        xywh {0 -5 280 335} color 31
+      } {
+        Fl_Box window_box {
+          xywh {5 3 270 97} box FLAT_BOX color 44
+        }
+        Fl_Output window_font {
+          label {Window Title Font}
+          xywh {45 20 160 30} box FLAT_BOX color 53 selection_color 72 align 1 when 1
+          code0 {get_font("WindowStyle",o);}
+        }
+        Fl_Button active_window_font_color_button {
+          label Active
+          callback {window_font_color(o, 1);}
+          tooltip {The foreground window font color} xywh {210 20 60 30} box FLAT_BOX color 23 align 1 when 6
+          code0 {get_window_font_color(o,1);}
+        }
+        Fl_Button {} {
+          callback {currentElement = "WindowStyle";
+Widget=window_font;
+font_chooser_window()->show();}
+          tooltip {Open the font list Window} image {custom_buttons/gear16.png} xywh {10 20 30 30} box FLAT_BOX color 23
+        }
+        Fl_Button window_font_color_button {
+          label Inactive
+          callback {window_font_color(o, 2);}
+          tooltip {The background window font color} xywh {210 65 60 30} box FLAT_BOX color 23 align 5 when 6
+          code0 {get_window_font_color(o,2);}
+        }
+        Fl_Box menu_box {
+          xywh {5 105 270 95} box FLAT_BOX color 44
+        }
+        Fl_Output menu_font {
+          label {Menu Font}
+          xywh {45 120 160 30} box FLAT_BOX color 53 selection_color 72 align 1
+          code0 {get_font("MenuStyle",o);}
+        }
+        Fl_Button {} {
+          callback {currentElement = "MenuStyle";
+Widget=menu_font;
+font_chooser_window()->show();}
+          tooltip {Open the font list Window} image {custom_buttons/gear16.png} xywh {10 120 30 30} box FLAT_BOX color 23
+        }
+        Fl_Button menu_font_color_button {
+          callback {font_color(o, "MenuStyle");}
+          xywh {210 120 60 30} box FLAT_BOX color 23 when 6
+          code0 {get_font_color(o,"MenuStyle");}
+        }
+        Fl_Output panel_button_font {
+          label {Panel Button Font}
+          xywh {45 165 160 30} box FLAT_BOX color 53 selection_color 72 align 1
+          code0 {if(!newOne()){get_font("TrayButtonStyle",o);}}
+          code1 {else{o->hide();}}
+        }
+        Fl_Button {} {
+          callback {currentElement = "TrayButtonStyle";
+Widget=panel_button_font;
+font_chooser_window()->show();}
+          tooltip {Open the font list Window} image {custom_buttons/gear16.png} xywh {10 165 30 30} box FLAT_BOX color 23
+          code0 {if(newOne()){o->hide();}}
+        }
+        Fl_Button traybutton_font_color_button {
+          callback {font_color(o, "TrayButtonStyle");}
+          xywh {210 165 60 30} box FLAT_BOX color 23 when 6
+          code0 {if(!newOne()){get_font_color(o,"TrayButtonStyle");}}
+          code1 {else{o->hide();}}
+        }
+        Fl_Box panel_box {
+          xywh {5 206 270 96} box FLAT_BOX color 44
+        }
+        Fl_Output panel_font {
+          label {Panel Font}
+          xywh {45 223 160 30} box FLAT_BOX color 53 selection_color 72 align 1
+          code0 {get_font("TrayStyle",o);}
+        }
+        Fl_Button {} {
+          callback {currentElement = "TrayStyle";
+Widget=panel_font;
+font_chooser_window()->show();}
+          tooltip {Open the font list Window} image {custom_buttons/gear16.png} xywh {10 223 30 30} box FLAT_BOX color 23
+        }
+        Fl_Button panel_font_color_button {
+          callback {font_color(o, "TrayStyle");}
+          xywh {210 223 60 30} box FLAT_BOX color 23 when 6
+          code0 {get_font_color(o,"TrayStyle");}
+        }
+        Fl_Button task_font_color_button {
+          callback {font_color(o, "TaskListStyle");}
+          xywh {210 268 60 30} box FLAT_BOX color 23 when 6
+          code0 {if(newOne()){o->hide();}else{get_font_color(o,"TaskListStyle");}}
+        }
+        Fl_Output task_font {
+          label {Running App List Font}
+          xywh {45 268 160 30} box FLAT_BOX color 53 selection_color 72 align 1
+          code0 {if(!newOne()){get_font( "TaskListStyle", o);}}
+          code1 {else{o->hide();}}
+        }
+        Fl_Button {} {
+          callback {currentElement = "TaskListStyle";
+Widget=task_font;
+font_chooser_window()->show();}
+          tooltip {Open the font list Window} image {custom_buttons/gear16.png} xywh {10 268 30 30} box FLAT_BOX color 23
+          code0 {if(newOne()){o->hide();}}
+        }
+        Fl_Button {} {
+          label Cancel
+          callback {cancel();
+font_window->hide();}
+          tooltip {No changes will be saved} xywh {155 305 60 25} box FLAT_BOX down_box GTK_DOWN_BOX color 80 selection_color 81 labelcolor 7
+        }
+        Fl_Button {} {
+          label OK
+          callback {saveChanges();
+font_window->hide();}
+          tooltip {Write to configuration file} xywh {225 305 45 25} box FLAT_BOX down_box GTK_DOWN_BOX color 61 selection_color 59 labelcolor 55
+        }
+        Fl_Output window_gtk_font {
+          label {Window Interior Font}
+          tooltip {The color of this cannot be chosen, this is the GTK font} xywh {45 65 160 30} box FLAT_BOX color 53 selection_color 72 align 1 when 1
+          code0 {gtk_get_font(o);}
+        }
+        Fl_Button {} {
+          callback {Widget=window_gtk_font;
+gtk_font_chooser_window()->show();}
+          tooltip {Open the font list Window} image {custom_buttons/gear16.png} xywh {10 65 30 30} box FLAT_BOX color 23
+        }
+      }
+    }
+  }
+  Function {font_chooser_window()} {open
+  } {
+    Fl_Window font_choosing {
+      label {Choose a Font} open
+      xywh {405 66 315 460} type Double hide
+      code0 {startup(o,jsm_fonts_xpm);} xclass {jsm-fonts}
+    } {
+      Fl_Button {} {
+        label Cancel
+        callback {font_choosing->hide();}
+        tooltip {No changes will be saved} xywh {195 430 60 25} box FLAT_BOX down_box GTK_DOWN_BOX color 80 selection_color 81 labelcolor 7
+      }
+      Fl_Button {} {
+        label OK
+        callback {font_chooser_cb(Widget,chooser_size,font_name,currentElement);
+font_choosing->hide();}
+        tooltip {Write to configuration file} xywh {265 430 45 25} box FLAT_BOX down_box GTK_DOWN_BOX color 61 selection_color 59 labelcolor 55
+      }
+      Fl_Tabs {} {open
+        xywh {0 0 320 430} box FLAT_BOX color 42 selection_color 50
+      } {
+        Fl_Group {} {
+          label {General Options} open
+          xywh {0 25 315 400} box FLAT_BOX color 50 selection_color 45
+        } {
+          Fl_Browser font_browser {
+            callback {font_browser_cb(font_browser,font_name,font_size_slider);}
+            xywh {5 25 305 285} type Hold box FLAT_BOX color 55 selection_color 72 labelfont 8 when 4
+            code0 {font_populate(o);}
+          }
+          Fl_Output font_name {
+            callback {//const char * item = font_browser->text(font_browser->value());
+unsigned int size_of_font = get_font_size(currentElement);
+Fl_Fontsize fs = size_of_font;
+o->textsize(fs);
+o->redraw();}
+            xywh {10 350 305 40} box FLAT_BOX color 55 selection_color 80 labelsize 20 when 6
+            code0 {get_font(currentElement,o);}
+          }
+          Fl_Slider font_size_slider {
+            callback {int size_of_font = o->value();
+chooser_size->value(size_of_font);
+chooser_size->redraw();
+Fl_Fontsize fs = size_of_font;
+font_name->textsize(fs);
+font_name->redraw();}
+            xywh {5 315 250 25} type Horizontal box GTK_DOWN_BOX color 41 selection_color 48 minimum 8 maximum 200 step 1 value 12
+            code0 {int fs = get_font_size(currentElement);}
+            code1 {o->value(fs);}
+          }
+          Fl_Value_Output chooser_size {
+            xywh {265 315 45 25} box FLAT_BOX color 23 minimum 8 maximum 200 step 1 value 12
+            code0 {int fs = get_font_size(currentElement);}
+            code1 {o->value(fs);}
+          }
+        }
+        Fl_Group {} {
+          label Advanced open
+          xywh {0 25 315 405} selection_color 45 hide
+        } {
+          Fl_Check_Button hint_check {
+            label Hinting
+            callback {std::string item="hinting";
+int val=o->value();
+std::string value="false";
+if(val!=0){value="true";}
+setFontOption(currentElement,item,value);
+hinting(val);}
+            tooltip {Whether the rasterizer should use hinting} xywh {10 240 85 25} down_box GTK_DOWN_BOX color 55 selection_color 61
+            code0 {std::string item="hinting";}
+            code1 {if(!getFontOpt(currentElement,item)){o->value(0);}else{o->value(1);}}
+          }
+          Fl_Check_Button {} {
+            label Antialiasing
+            callback {std::string item="antialias";
+int val=o->value();
+std::string value="false";
+if(val!=0){value="true";}
+setFontOption(currentElement,item,value);}
+            tooltip {Whether glyphs can be antialiased} xywh {10 263 110 25} down_box GTK_DOWN_BOX color 55 selection_color 61
+            code0 {std::string item="antialias";}
+            code1 {if(!getFontOpt(currentElement,item)){o->value(0);}else{o->value(1);}}
+          }
+          Fl_Value_Input {} {
+            label DPI
+            tooltip {Target dots per inch} xywh {75 375 25 25} box FLAT_BOX align 8
+          }
+          Fl_Menu_Button {} {
+            label RGBA open
+            tooltip {rgb, bgr, vrgb, vbgr, none - subpixel geometry} xywh {10 40 85 25} box FLAT_BOX color 23 selection_color 120
+          } {
+            MenuItem {} {
+              label rgb
+              callback {std::string item="rgba";
+std::string value="rgb";
+setFontOption(currentElement,item,value);
+rgba_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label bgr
+              callback {std::string item="rgba";
+std::string value="bgr";
+setFontOption(currentElement,item,value);
+rgba_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label vrgb
+              callback {std::string item="rgba";
+std::string value="vrgb";
+setFontOption(currentElement,item,value);
+rgba_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label vbgr
+              callback {std::string item="rgba";
+std::string value="vbgr";
+setFontOption(currentElement,item,value);
+rgba_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label none
+              callback {std::string item="rgba";
+std::string value="none";
+setFontOption(currentElement,item,value);
+rgba_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+          }
+          Fl_Menu_Button {} {
+            label Weight open
+            xywh {10 73 85 25} box FLAT_BOX color 23 selection_color 120
+          } {
+            MenuItem {} {
+              label Light
+              callback {std::string item="weight";
+std::string value="light";
+setFontOption(currentElement,item,value);
+weight_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label Medium
+              callback {std::string item="weight";
+std::string value="medium";
+setFontOption(currentElement,item,value);
+weight_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label Demibold
+              callback {std::string item="weight";
+std::string value="demibold";
+setFontOption(currentElement,item,value);
+weight_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label Black
+              callback {std::string item="weight";
+std::string value="black";
+setFontOption(currentElement,item,value);
+weight_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+          }
+          Fl_Menu_Button {} {
+            label Width open
+            tooltip {Condensed, normal or expanded} xywh {10 107 85 25} box FLAT_BOX color 23 selection_color 120
+          } {
+            MenuItem {} {
+              label {Extra Condensed}
+              callback {std::string item="width";
+std::string value="63";
+setFontOption(currentElement,item,value);
+width_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label {Ultra Condensed}
+              callback {std::string item="width";
+std::string value="50";
+setFontOption(currentElement,item,value);
+width_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label {Semi Condensed}
+              callback {std::string item="width";
+std::string value="87";
+setFontOption(currentElement,item,value);
+width_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label Condensed
+              callback {std::string item="width";
+std::string value="75";
+setFontOption(currentElement,item,value);
+width_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label Normal
+              callback {std::string item="width";
+std::string value="100";
+setFontOption(currentElement,item,value);
+width_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label {Semi Expanded}
+              callback {std::string item="width";
+std::string value="113";
+setFontOption(currentElement,item,value);
+width_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label Expanded
+              callback {std::string item="width";
+std::string value="125";
+setFontOption(currentElement,item,value);
+width_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label {Extra Expanded}
+              callback {std::string item="width";
+std::string value="150";
+setFontOption(currentElement,item,value);
+width_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+            MenuItem {} {
+              label {Ultra Expanded}
+              callback {std::string item="width";
+std::string value="200";
+setFontOption(currentElement,item,value);
+width_out->value(value.c_str());}
+              xywh {0 0 100 20}
+            }
+          }
+          Fl_Menu_Button {} {
+            label {LCD Filter} open
+            tooltip {Type of LCD filter} xywh {10 141 85 25} box FLAT_BOX color 23 selection_color 120
+          } {
+            MenuItem {} {
+              label None
+              callback {std::string item="lcdfilter";
+std::string value="lcdnone";
+setFontOption(currentElement,item,value);
+lcd_out->value(value.c_str());}
+              xywh {10 10 100 20}
+            }
+            MenuItem {} {
+              label Default
+              callback {std::string item="lcdfilter";
+std::string value="lcddefault";
+setFontOption(currentElement,item,value);
+lcd_out->value(value.c_str());}
+              xywh {10 10 100 20}
+            }
+            MenuItem {} {
+              label Light
+              callback {std::string item="lcdfilter";
+std::string value="lcdlight";
+setFontOption(currentElement,item,value);
+lcd_out->value(value.c_str());}
+              xywh {10 10 100 20}
+            }
+            MenuItem {} {
+              label Legacy
+              callback {std::string item="lcdfilter";
+std::string value="lcdlegacy";
+setFontOption(currentElement,item,value);
+lcd_out->value(value.c_str());}
+              xywh {10 10 100 20}
+            }
+          }
+          Fl_Menu_Button {} {
+            label {Hint Style} open
+            tooltip {Automatic hinting style} xywh {10 175 85 25} box FLAT_BOX color 23 selection_color 120
+          } {
+            MenuItem {} {
+              label None
+              callback {std::string item="hintstyle";
+std::string value="0";
+setFontOption(currentElement,item,value);
+hint_out->value(value.c_str());}
+              xywh {20 20 100 20}
+            }
+            MenuItem {} {
+              label Light
+              callback {std::string item="hintstyle";
+std::string value="1";
+setFontOption(currentElement,item,value);
+hint_out->value(value.c_str());}
+              xywh {20 20 100 20}
+            }
+            MenuItem {} {
+              label Medium
+              callback {std::string item="hintstyle";
+std::string value="2";
+setFontOption(currentElement,item,value);
+hint_out->value(value.c_str());}
+              xywh {20 20 100 20}
+            }
+            MenuItem {} {
+              label Full
+              callback {std::string item="hintstyle";
+std::string value="hintfull";
+setFontOption(currentElement,item,value);
+hint_out->value(value.c_str());}
+              xywh {20 20 100 20}
+            }
+          }
+          Fl_Output rgba_out {
+            xywh {110 40 95 25} box FLAT_BOX color 54 selection_color 120
+            code0 {std::string item="rgba";}
+            code1 {std::string tmp=getFontOPT(currentElement,item);}
+            code2 {if(tmp.compare("")!=0){o->value(tmp.c_str());}}
+          }
+          Fl_Output weight_out {
+            xywh {110 73 95 25} box FLAT_BOX color 54 selection_color 120
+            code0 {std::string item="weight";}
+            code1 {std::string tmp=getFontOPT(currentElement,item);}
+            code2 {if(tmp.compare("")!=0){o->value(tmp.c_str());}}
+          }
+          Fl_Output width_out {
+            xywh {110 107 95 25} box FLAT_BOX color 54 selection_color 120
+            code0 {std::string item="width";}
+            code1 {std::string tmp=getFontOPT(currentElement,item);}
+            code2 {if(tmp.compare("")!=0){o->value(tmp.c_str());}}
+          }
+          Fl_Output lcd_out {
+            xywh {110 141 95 25} box FLAT_BOX color 54 selection_color 120
+            code0 {std::string item="lcdfilter";}
+            code1 {std::string tmp=getFontOPT(currentElement,item);}
+            code2 {if(tmp.compare("")!=0){o->value(tmp.c_str());}}
+          }
+          Fl_Output hint_out {
+            xywh {110 175 95 25} box FLAT_BOX color 54 selection_color 120
+            code0 {std::string item="hintstyle";}
+            code1 {std::string tmp=getFontOPT(currentElement,item);}
+            code2 {if(tmp.compare("")!=0){o->value(tmp.c_str());}}
+          }
+          Fl_Check_Button {} {
+            label Autohint
+            tooltip {Use autohinter instead of normal hinter} xywh {10 285 110 25} down_box GTK_DOWN_BOX color 55 selection_color 61
+            code0 {std::string item="autohint";}
+            code1 {if(!getFontOpt(currentElement,item)){o->value(0);}else{o->value(1);}}
+          }
+          Fl_Check_Button {} {
+            label {Vertical Layout}
+            tooltip {Use vertical layout} xywh {10 308 110 25} down_box GTK_DOWN_BOX color 55 selection_color 61
+            code0 {std::string item="verticallayout";}
+            code1 {if(!getFontOpt(currentElement,item)){o->value(0);}else{o->value(1);}}
+          }
+          Fl_Check_Button {} {
+            label {No Leading space}
+            tooltip {Eliminate leading from line spacing} xywh {10 330 110 25} down_box GTK_DOWN_BOX color 55 selection_color 61
+            code0 {std::string item="minspace";}
+            code1 {if(!getFontOpt(currentElement,item)){o->value(0);}else{o->value(1);}}
+          }
+          Fl_Check_Button {} {
+            label Bold
+            xywh {190 350 110 25} down_box GTK_DOWN_BOX color 55 selection_color 61 deactivate
+          }
+          Fl_Check_Button {} {
+            label Italic
+            xywh {190 375 110 25} down_box GTK_DOWN_BOX color 55 selection_color 61 deactivate
+          }
+          Fl_Input {} {
+            label Encoding
+            callback {std::string item="encoding";
+const char* tmp=o->value();
+if(tmp!=NULL){
+  setFontOption(currentElement,item,tmp);
+}}
+            xywh {10 210 95 25} box FLAT_BOX selection_color 120 align 8
+            code0 {std::string item="encoding";}
+            code1 {std::string tmp=getFontOPT(currentElement,item);}
+            code2 {if(tmp.compare("")!=0){o->value(tmp.c_str());}}
+          }
+        }
+      }
+    }
+  }
+  Function {gtk_font_chooser_window()} {open
+  } {
+    Fl_Window gtk_font_choosing {
+      label {Choose a Font} open
+      xywh {692 163 315 405} type Double hide
+      code0 {startup(o,jsm_fonts_xpm);} xclass {jsm-fonts}
+    } {
+      Fl_Button {} {
+        label Cancel
+        callback {gtk_font_choosing->hide();}
+        tooltip {No changes will be saved} xywh {195 375 60 25} box FLAT_BOX down_box GTK_DOWN_BOX color 80 selection_color 81 labelcolor 7
+      }
+      Fl_Button {} {
+        label OK
+        callback {gtk_font_chooser_cb(Widget,gtk_chooser_size,gtk_font_name);
+gtk_font_choosing->hide();}
+        tooltip {You will need to reopen active apps} xywh {265 375 45 25} box FLAT_BOX down_box GTK_DOWN_BOX color 61 selection_color 59 labelcolor 55
+      }
+      Fl_Browser gtk_font_browser {
+        callback {font_browser_cb(gtk_font_browser,gtk_font_name,gtk_font_size_slider);}
+        xywh {5 5 305 285} type Hold box FLAT_BOX color 55 selection_color 72 labelfont 8 when 4
+        code0 {font_populate(o);}
+      }
+      Fl_Output gtk_font_name {
+        callback {//const char * item = font_browser->text(font_browser->value());
+unsigned int size_of_font = 0;//get_font_size(currentElement);
+Fl_Fontsize fs = size_of_font;
+o->textsize(fs);
+o->redraw();}
+        xywh {5 330 305 40} box FLAT_BOX color 55 selection_color 80 labelsize 20 when 6
+        code0 {gtk_get_font(o);}
+      }
+      Fl_Slider gtk_font_size_slider {
+        callback {int size_of_font = o->value();
+gtk_chooser_size->value(size_of_font);
+gtk_chooser_size->redraw();
+Fl_Fontsize fs = size_of_font;
+gtk_font_name->textsize(fs);
+gtk_font_name->redraw();}
+        xywh {5 295 250 25} type Horizontal box GTK_DOWN_BOX color 41 selection_color 48 minimum 8 maximum 200 step 1 value 12
+        code0 {int fs = gtk_get_font_size();}
+        code1 {o->value(fs);}
+      }
+      Fl_Value_Output gtk_chooser_size {
+        xywh {265 295 45 25} box FLAT_BOX color 23 minimum 8 maximum 200 step 1 value 12
+        code0 {int fs = gtk_get_font_size();}
+        code1 {o->value(fs);}
+      }
+    }
+  }
+  Function {hinting(int val)} {open
+  } {
+    code {//hint_check->value(val);
+std::string item="hintstyle";
+if(val!=0){
+  std::string tmp=getFontOPT(currentElement,item);
+  if(tmp.compare("")!=0){
+    
+    std::string  value="hintfull";
+    setFontOption(currentElement,item,value);
+    hint_out->value(value.c_str());
+  }
+}} {}
+  }
+} 

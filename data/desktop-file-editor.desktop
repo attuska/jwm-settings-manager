@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Shortcut Editor
+GenericName=Configuration tool
+Exec=desktop-file-editor %f
+Terminal=false
+Categories=Utility;GTK;
+MimeType=application/x-desktop;
+Comment=Create new or change existing desktop entry
+Icon=applications-other
+NoDisplay=false

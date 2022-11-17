@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Mouse/Touchpad Settings
+GenericName=Configuration Tool
+Icon=jsm-mouse
+Exec=fltk-mouse
+Terminal=false
+Type=Application
+Categories=Settings;System;
+NotShowIn=GNOME;KDE;LXDE;MATE;LXQt;XFCE;Cinnamon;

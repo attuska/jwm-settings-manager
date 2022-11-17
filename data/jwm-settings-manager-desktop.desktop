@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Desktop Settings
+GenericName=Configuration Tool
+Icon=jsm-desktop
+Exec=jwm-settings-manager --desktop
+Terminal=false
+Type=Application
+Categories=Settings;System;
+NotShowIn=GNOME;KDE;LXDE;MATE;LXQt;XFCE;Cinnamon;

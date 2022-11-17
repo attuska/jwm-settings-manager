@@ -1,0 +1,1103 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+i18n_type 1
+i18n_include <libintl.h>
+i18n_function gettext
+header_name {.h}
+code_name {.cxx}
+comment {/*                 Joe's Window Manager Configuration
+ *
+ * This program configures JWM using pugixml and FLTK
+ *
+ *         Copyright (C) 2016  Israel <israeldahl@gmail.com>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This has been developed as a part of the ToriOS Project
+ *
+ *
+ * You may redistribute this, but you must keep this comment in place
+ * Jesus is my Lord, and if you don't like it feel free to ignore it.
+ */} {in_source in_header
+}
+
+decl {\#include <libintl.h>} {public global
+}
+
+decl {\#include <FL/Fl_File_Chooser.H>} {public global
+}
+
+decl {\#include <string>} {public global
+}
+
+decl {\#include <stdlib.h>} {public global
+}
+
+decl {\#include <iostream>} {public global
+}
+
+decl {\#include "../include/jwmrc.hpp"} {public global
+}
+
+decl {\#include "../include/ui.hpp"} {public global
+}
+
+decl {\#include "../include/keyboard.hpp"} {public global
+}
+
+decl {\#include "../data/icons/jsm-keyboard.xpm"} {public global
+}
+
+decl {struct keycode_table{int n; const char* text;} table[] = {
+  {FL_Escape, "Escape"},
+  {FL_BackSpace, "BackSpace"},
+  {FL_Tab, "Tab"},
+  {FL_Iso_Key, "Iso_Key"},
+  {FL_Enter, "Enter"},
+  {FL_Print, "Print"},
+  {FL_Scroll_Lock, "Scroll_Lock"},
+  {FL_Pause, "Pause"},
+  {FL_Insert, "Insert"},
+  {FL_Home, "Home"},
+  {FL_Page_Up, "Page_Up"},
+  {FL_Delete, "Delete"},
+  {FL_End, "End"},
+  {FL_Page_Down, "Page_Down"},
+  {FL_Left, "Left"},
+  {FL_Up, "Up"},
+  {FL_Right, "Right"},
+  {FL_Down, "Down"},
+  {FL_Shift_L, "Shift"},
+  {FL_Shift_R, "Shift"},
+  {FL_Control_L, "Control"},
+  {FL_Control_R, "Control"},
+  {FL_Caps_Lock, "Caps_Lock"},
+  {FL_Alt_L, "Alt"},
+  {FL_Alt_R, "Alt"},
+  {FL_Meta_L, "Meta"},
+  {FL_Meta_R, "Meta"},
+  {FL_Menu, "Menu"},
+  {FL_Help, "Help"},
+  {FL_Num_Lock, "Num_Lock"},
+  {FL_KP_Enter, "Enter"},
+  {FL_Volume_Down, "XF86AudioLowerVolume"},
+  {FL_Volume_Up, "XF86AudioRaiseVolume"},
+  {FL_Volume_Mute, "XF86AudioMute"},
+  {FL_Media_Play,"XF86AudioPause"},
+  {FL_Media_Stop,"XF86AudioStop"},
+  {FL_Media_Prev,"XF86AudioPrev"},
+  {FL_Media_Next,"XF86AudioNext"},
+  {FL_Home_Page,"XF86HomePage"},
+  {FL_Mail,"XF86Mail"},
+  {FL_Search,"XF86Search"},
+  {FL_Back,"XF86Back"},
+  {FL_Forward,"XF86Forward"},
+  {FL_Sleep,"XF86Standby"},
+  {FL_Favorites,"XF86Favorites"}
+};} {private global
+}
+
+class KeyboardUI {open : {public JWM_Keyboard}
+} {
+  decl {int JWMVERSION;} {private local
+  }
+  Function {config_key_win()} {open
+  } {
+    Fl_Window conf_key_win {
+      label {Configure Keyboard Shortcut} open selected
+      xywh {895 387 355 180} type Double
+      code0 {debug_out("config_key_win()->show()");startup(o,jsm_keyboard_xpm);}
+      code1 {\#if FL_PATCH_VERSION == 4}
+      code2 {o->wait_for_expose();}
+      code3 {\#endif} xclass {jsm-keyboard} visible
+    } {
+      Fl_Button {} {
+        label OK
+        callback {std::string oldval=oldvalue(old_action,
+                            current_key,
+                            current_mod1,
+                            current_mod2,
+                            current_mod3);
+if(Configure_CB(mod1_output,mod2_output,mod3_output,keyshortcut,action_name1,oldval)){
+  conf_key_win->hide();
+}}
+        xywh {285 145 65 30} box FLAT_BOX color 61 selection_color 58 labelcolor 7
+      }
+      Fl_Menu_Button {} {
+        label Action
+        xywh {220 110 130 30} box FLAT_BOX color 23 selection_color 80
+      } {
+        MenuItem next1 {
+          label {move to the next window in the task list}
+          callback {const char * action = "next";
+menu_cb(action);}
+          xywh {30 30 100 20}
+        }
+        MenuItem nextstacked1 {
+          label {move to the next window in the stacking order}
+          callback {const char * action = "nextstacked";
+menu_cb(action);}
+          xywh {40 40 100 20}
+        }
+        MenuItem prev1 {
+          label {move to the previous window in the task list}
+          callback {const char * action = "prev";
+menu_cb(action);}
+          xywh {40 40 100 20}
+        }
+        MenuItem prevstacked1 {
+          label {move to the previous window in the stacking order}
+          callback {const char * action = "prevstacked";
+menu_cb(action);}
+          xywh {50 50 100 20}
+        }
+        MenuItem close1 {
+          label {close window}
+          callback {const char * action = "close";
+menu_cb(action);}
+          xywh {50 50 100 20}
+        }
+        MenuItem fullscreen1 {
+          label {fullscreen window}
+          callback {const char * action = "fullscreen";
+menu_cb(action);}
+          xywh {60 60 100 20}
+        }
+        MenuItem minimize1 {
+          label {minimize window}
+          callback {const char * action = "minimize";
+menu_cb(action);}
+          xywh {70 70 100 20}
+        }
+        MenuItem maximize1 {
+          label {maximize window}
+          callback {const char * action = "maximize";
+menu_cb(action);}
+          xywh {80 80 100 20}
+        }
+        MenuItem shade1 {
+          label {roll up window}
+          callback {const char * action = "shade";
+menu_cb(action);}
+          xywh {90 90 100 20}
+        }
+        MenuItem move1 {
+          label {move window}
+          callback {const char * action = "move";
+menu_cb(action);}
+          xywh {100 100 100 20}
+        }
+        MenuItem resize1 {
+          label {resize window}
+          callback {const char * action = "resize";
+menu_cb(action);}
+          xywh {110 110 100 20}
+        }
+        MenuItem window1 {
+          label {show window menu}
+          callback {const char * action = "window";
+menu_cb(action);}
+          xywh {120 120 100 20}
+        }
+        MenuItem root_menu_apps1 {
+          label {Show Application menu}
+          callback {const char * action = "root:5";
+menu_cb(action);}
+          xywh {130 130 100 20}
+        }
+        MenuItem root_menu_places1 {
+          label {Show Places Menu}
+          callback {const char * action = "root:7";
+menu_cb(action);}
+          xywh {140 140 100 20}
+        }
+        MenuItem root_menu_shutdown1 {
+          label {Show Shutdown menu}
+          callback {const char * action = "root:9";
+menu_cb(action);}
+          xywh {150 150 100 20}
+        }
+        MenuItem rdesktop1 {
+          label {move one desktop to the right}
+          callback {const char * action = "rdesktop";
+menu_cb(action);}
+          xywh {110 110 100 20}
+        }
+        MenuItem ldesktop1 {
+          label {move one desktop to the left}
+          callback {const char * action = "ldesktop";
+menu_cb(action);}
+          xywh {120 120 100 20}
+        }
+        MenuItem udesktop1 {
+          label {move one desktop up}
+          callback {const char * action = "udesktop";
+menu_cb(action);}
+          xywh {130 130 100 20}
+        }
+        MenuItem ddesktop1 {
+          label {move one desktop down}
+          callback {const char * action = "ddesktop";
+menu_cb(action);}
+          xywh {140 140 100 20}
+        }
+        MenuItem restart1 {
+          label {restart the Window Manager}
+          callback {const char * action = "restart";
+menu_cb(action);}
+          xywh {150 150 100 20}
+        }
+        MenuItem exit1 {
+          label {exit the Window Manager}
+          callback {const char * action = "exit";
+menu_cb(action);}
+          xywh {160 160 100 20}
+        }
+        MenuItem showtray1 {
+          label {Show any hidden Panels}
+          callback {const char * action = "showtray";
+menu_cb(action);}
+          xywh {170 170 100 20}
+        }
+        MenuItem maxtop1 {
+          label {Maximize to the Top of the screen}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxtop";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {120 120 100 20}
+        }
+        MenuItem maxbottom1 {
+          label {Maximize to the Bottom of the screen}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxbottom";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {130 130 100 20}
+        }
+        MenuItem maxleft1 {
+          label {Maximize to the Left of the screen}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxleft";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {140 140 100 20}
+        }
+        MenuItem maxright1 {
+          label {Maximize to the Right of the screen}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxright";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {150 150 100 20}
+        }
+        MenuItem maxv1 {
+          label {Maximize Vertical}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxv";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {160 160 100 20}
+        }
+        MenuItem maxh1 {
+          label {Maximize Horizontal}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxh";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {170 170 100 20}
+        }
+        MenuItem sendu1 {
+          label {Send Window Up a Desktop}
+          callback {if(JWMVERSION>=230){
+  const char * action = "sendu";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {180 180 100 20}
+        }
+        MenuItem sendd1 {
+          label {Send Window Down a Desktop}
+          callback {if(JWMVERSION>=230){
+  const char * action = "sendd";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {190 190 100 20}
+        }
+        MenuItem sendr1 {
+          label {Send Window Right a Desktop}
+          callback {if(JWMVERSION>=230){
+  const char * action = "sendr";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {200 200 100 20}
+        }
+        MenuItem sendl1 {
+          label {Send Window Left a Desktop}
+          callback {if(JWMVERSION>=230){
+  const char * action = "sendl";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {210 210 100 20}
+        }
+        MenuItem restore1 {
+          label {Restore a minimized window}
+          callback {if(JWMVERSION>=233){
+  const char * action = "restore";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {0 0 100 20}
+        }
+      }
+      Fl_Button {} {
+        label {Choose Program}
+        callback {Choose_Action(action_name1);}
+        tooltip {Choose a program to add} xywh {5 110 155 30} box FLAT_BOX color 23
+      }
+      Fl_Input action_name1 {
+        xywh {5 145 200 30} box FLAT_BOX align 129
+      }
+      Fl_Box {} {
+        label OR
+        xywh {175 115 25 25} labelfont 1
+      }
+      Fl_Button {} {
+        label Cancel
+        callback {conf_key_win->hide();}
+        xywh {215 145 65 30} box FLAT_BOX color 80 selection_color 64 labelcolor 7
+      }
+      Fl_Output mod1_output {
+        label Modifiers
+        xywh {70 40 50 30} box FLAT_BOX color 53
+      }
+      Fl_Output mod2_output {
+        xywh {125 40 50 30} box FLAT_BOX color 53
+      }
+      Fl_Output mod3_output {
+        xywh {180 40 50 30} box FLAT_BOX color 53
+      }
+      Fl_Output current_mod1 {
+        label Current
+        tooltip {Current Shortcut to Edit} xywh {70 5 50 30} box FLAT_BOX color 45 textcolor 55
+      }
+      Fl_Button {} {
+        label {GRAB KEY}
+        callback {key_wait(mod1_output,mod2_output,mod3_output,keyshortcut);
+o->deactivate();}
+        tooltip {This will grab a new key combo} xywh {5 75 205 30} box FLAT_BOX color 95 selection_color 31
+      }
+      Fl_Output keyshortcut {
+        label Key
+        xywh {260 40 90 30} box FLAT_BOX color 53
+      }
+      Fl_Output current_key {
+        label Key
+        tooltip {Current Shortcut to Edit} xywh {260 5 90 30} box FLAT_BOX color 45 textcolor 55
+      }
+      Fl_Output current_mod2 {
+        tooltip {Current Shortcut to Edit} xywh {125 5 50 30} box FLAT_BOX color 45 textcolor 55
+      }
+      Fl_Output current_mod3 {
+        tooltip {Current Shortcut to Edit} xywh {180 5 50 30} box FLAT_BOX color 45 textcolor 55
+      }
+      Fl_Output old_action {
+        xywh {140 20 50 20} box FLAT_BOX color 45 textcolor 55 hide
+      }
+      Fl_Menu_Button {} {
+        label {Special Keys}
+        tooltip {Picture button keys on the keyboard} xywh {220 75 130 30} box FLAT_BOX color 23 selection_color 80
+      } {
+        MenuItem {} {
+          label XF86Tools
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used for settings} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86Search
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to launch a search program} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86LaunchA
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to show the applications} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86Explorer
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to open a file manager} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86Display
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to open display settings} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86PowerOff
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to turn off computer} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86AudioMute
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to Mute audio} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86AudioRaiseVolume
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to raise the volume} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86AudioLowerVolume
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to lower the volume} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86MonBrightnessDown
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to lower monitor brightness} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86MonBrightnessUp
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to raise monitor brightness} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86Calculator
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to launch the calculator program} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86AudioMicMute
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to mute a microphone} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86HomePage
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to launch a web browser} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86MyComputer
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to launch a filemanager} xywh {0 0 100 20}
+        }
+        MenuItem {} {
+          label XF86WWW
+          callback {special_cb(o->text(),keyshortcut);}
+          tooltip {Usually used to launch a web browser} xywh {0 0 100 20}
+        }
+      }
+    }
+  }
+  Function {grabber_window()} {} {
+    Fl_Window grab_win {
+      label {Create Keyboard Shortcut} open
+      xywh {719 196 350 150} type Double when 6 hide
+      code0 {startup(o,jsm_keyboard_xpm);}
+      code1 {debug_out("grabber_window()->show()");} xclass {jsm-keyboard}
+    } {
+      Fl_Button {} {
+        label OK
+        callback {if(add_cb(action_name,key,mod_output,modder_output,modder3_output,key_browser)){
+  grab_win->hide();
+}}
+        xywh {280 115 65 30} box FLAT_BOX color 61 selection_color 58 labelcolor 7
+      }
+      Fl_Menu_Button {} {
+        label Action
+        xywh {210 80 135 30} box FLAT_BOX color 23 selection_color 80
+      } {
+        MenuItem next {
+          label {move to the next window in the task list}
+          callback {const char * action = "next";
+menu_cb(action);}
+          xywh {20 20 100 20}
+        }
+        MenuItem nextstacked {
+          label {move to the next window in the stacking order}
+          callback {const char * action = "nextstacked";
+menu_cb(action);}
+          xywh {30 30 100 20}
+        }
+        MenuItem prev {
+          label {move to the previous window in the task list}
+          callback {const char * action = "prev";
+menu_cb(action);}
+          xywh {30 30 100 20}
+        }
+        MenuItem prevstacked {
+          label {move to the previous window in the stacking order}
+          callback {const char * action = "prevstacked";
+menu_cb(action);}
+          xywh {40 40 100 20}
+        }
+        MenuItem close {
+          label {close window}
+          callback {const char * action = "close";
+menu_cb(action);}
+          xywh {40 40 100 20}
+        }
+        MenuItem fullscreen {
+          label {fullscreen window}
+          callback {const char * action = "fullscreen";
+menu_cb(action);}
+          xywh {50 50 100 20}
+        }
+        MenuItem minimize {
+          label {minimize window}
+          callback {const char * action = "minimize";
+menu_cb(action);}
+          xywh {60 60 100 20}
+        }
+        MenuItem maximize {
+          label {maximize window}
+          callback {const char * action = "maximize";
+menu_cb(action);}
+          xywh {70 70 100 20}
+        }
+        MenuItem shade {
+          label {roll up window}
+          callback {const char * action = "shade";
+menu_cb(action);}
+          xywh {80 80 100 20}
+        }
+        MenuItem move {
+          label {move window}
+          callback {const char * action = "move";
+menu_cb(action);}
+          xywh {90 90 100 20}
+        }
+        MenuItem resize {
+          label {resize window}
+          callback {const char * action = "resize";
+menu_cb(action);}
+          xywh {100 100 100 20}
+        }
+        MenuItem window {
+          label {show window menu}
+          callback {const char * action = "window";
+menu_cb(action);}
+          xywh {110 110 100 20}
+        }
+        MenuItem root_menu_apps {
+          label {Show Application menu}
+          callback {const char * action = "root:5";
+menu_cb(action);}
+          xywh {120 120 100 20}
+        }
+        MenuItem root_menu_places {
+          label {Show Places Menu}
+          callback {const char * action = "root:7";
+menu_cb(action);}
+          xywh {130 130 100 20}
+        }
+        MenuItem root_menu_shutdown {
+          label {Show Shutdown menu}
+          callback {const char * action = "root:9";
+menu_cb(action);}
+          xywh {140 140 100 20}
+        }
+        MenuItem rdesktop {
+          label {move one desktop to the right}
+          callback {const char * action = "rdesktop";
+menu_cb(action);}
+          xywh {100 100 100 20}
+        }
+        MenuItem ldesktop {
+          label {move one desktop to the left}
+          callback {const char * action = "ldesktop";
+menu_cb(action);}
+          xywh {110 110 100 20}
+        }
+        MenuItem udesktop {
+          label {move one desktop up}
+          callback {const char * action = "udesktop";
+menu_cb(action);}
+          xywh {120 120 100 20}
+        }
+        MenuItem ddesktop {
+          label {move one desktop down}
+          callback {const char * action = "ddesktop";
+menu_cb(action);}
+          xywh {130 130 100 20}
+        }
+        MenuItem restart {
+          label {restart the Window Manager}
+          callback {const char * action = "restart";
+menu_cb(action);}
+          xywh {140 140 100 20}
+        }
+        MenuItem exit {
+          label {exit the Window Manager}
+          callback {const char * action = "exit";
+menu_cb(action);}
+          xywh {150 150 100 20}
+        }
+        MenuItem showtray {
+          label {Show any hidden Panels}
+          callback {const char * action = "showtray";
+menu_cb(action);}
+          xywh {160 160 100 20}
+        }
+        MenuItem maxtop {
+          label {Maximize to the Top of the screen}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxtop";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {110 110 100 20}
+        }
+        MenuItem maxbottom {
+          label {Maximize to the Bottom of the screen}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxbottom";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {120 120 100 20}
+        }
+        MenuItem maxleft {
+          label {Maximize to the Left of the screen}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxleft";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {130 130 100 20}
+        }
+        MenuItem maxright {
+          label {Maximize to the Right of the screen}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxright";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {140 140 100 20}
+        }
+        MenuItem maxv {
+          label {Maximize Vertical}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxv";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {150 150 100 20}
+        }
+        MenuItem maxh {
+          label {Maximize Horizontal}
+          callback {if(JWMVERSION>=230){
+  const char * action = "maxh";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {160 160 100 20}
+        }
+        MenuItem sendu {
+          label {Send Window Up a Desktop}
+          callback {if(JWMVERSION>=230){
+  const char * action = "sendu";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {170 170 100 20}
+        }
+        MenuItem sendd {
+          label {Send Window Down a Desktop}
+          callback {if(JWMVERSION>=230){
+  const char * action = "sendd";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {180 180 100 20}
+        }
+        MenuItem sendr {
+          label {Send Window Right a Desktop}
+          callback {if(JWMVERSION>=230){
+  const char * action = "sendr";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {190 190 100 20}
+        }
+        MenuItem sendl {
+          label {Send Window Left a Desktop}
+          callback {if(JWMVERSION>=230){
+  const char * action = "sendl";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {200 200 100 20}
+        }
+        MenuItem restore {
+          label {Restore a minimized window}
+          callback {if(JWMVERSION>=233){
+  const char * action = "restore";
+  menu_cb(action);
+}
+else{
+  o->hide();
+}}
+          xywh {10 10 100 20}
+        }
+      }
+      Fl_Button {} {
+        label {Choose Program}
+        callback {Choose_Action(action_name);}
+        tooltip {Choose a program to add} xywh {5 80 145 30} box FLAT_BOX color 23
+      }
+      Fl_Input action_name {
+        xywh {5 115 200 30} box FLAT_BOX align 129
+      }
+      Fl_Box {} {
+        label OR
+        xywh {170 85 25 25} labelfont 1
+      }
+      Fl_Button {} {
+        label Cancel
+        callback {grab_win->hide();}
+        xywh {210 115 65 30} box FLAT_BOX color 80 selection_color 64 labelcolor 7
+      }
+      Fl_Output mod_output {
+        label Modifiers
+        tooltip {First keyboard modifier} xywh {75 5 50 30} box FLAT_BOX color 53
+      }
+      Fl_Output modder_output {
+        tooltip {Second keyboard modifier} xywh {130 5 50 30} box FLAT_BOX color 53
+      }
+      Fl_Button {} {
+        label {GRAB KEY}
+        callback {key_wait(mod_output,modder_output,modder3_output,key);
+o->deactivate();}
+        tooltip {This will grab a new key combo} xywh {5 40 200 30} box FLAT_BOX color 95 selection_color 31
+      }
+      Fl_Output modder3_output {
+        tooltip {Second keyboard modifier} xywh {185 5 50 30} box FLAT_BOX color 53
+      }
+      Fl_Output key {
+        label Key
+        tooltip {Second keyboard modifier} xywh {270 5 75 30} box FLAT_BOX color 53
+      }
+      Fl_Menu_Button {} {
+        label {Special Keys}
+        tooltip {Picture button keys on the keyboard} xywh {210 40 135 30} box FLAT_BOX color 23 selection_color 80
+      } {
+        MenuItem {} {
+          label XF86Tools
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used for settings} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86Search
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to launch a search program} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86LaunchA
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to show the applications} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86Explorer
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to open a file manager} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86Display
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to open display settings} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86PowerOff
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to turn off computer} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86AudioMute
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to Mute audio} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86AudioRaiseVolume
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to raise the volume} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86AudioLowerVolume
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to lower the volume} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86MonBrightnessDown
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to lower monitor brightness} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86MonBrightnessUp
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to raise monitor brightness} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86Calculator
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to launch the calculator program} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86AudioMicMute
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to mute a microphone} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86HomePage
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to launch a web browser} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86MyComputer
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to launch a filemanager} xywh {10 10 100 20}
+        }
+        MenuItem {} {
+          label XF86WWW
+          callback {special_cb(o->text(),key);}
+          tooltip {Usually used to launch a web browser} xywh {10 10 100 20}
+        }
+      }
+    }
+  }
+  Function {layout_window()} {} {
+    Fl_Window layout_win {
+      label Layout open
+      xywh {561 233 490 310} type Double hide
+    } {
+      Fl_Browser {} {
+        label Layout
+        callback {std::string val =fixLayoutString(o);
+layoutput->value(val.c_str());
+layoutput->redraw();}
+        tooltip {The Keyboard regional layout} xywh {5 5 150 225} type Hold box FLAT_BOX selection_color 80
+        code0 {keyLayoutPopulate(o);}
+      }
+      Fl_Input layoutput {
+        xywh {5 245 150 25} box FLAT_BOX
+        code0 {o->value(getLayout(o,"layout").c_str());}
+      }
+      Fl_Button {} {
+        label OK
+        callback {setLayout(layoutput, modeloutput, optionoutput);}
+        tooltip {Write to configuration file} xywh {440 275 45 30} box FLAT_BOX color 61 selection_color 59 labelcolor 55
+      }
+      Fl_Button {} {
+        label Cancel
+        callback {layout_win->hide();}
+        xywh {360 275 65 30} box FLAT_BOX color 80 selection_color 81 labelcolor 7
+      }
+      Fl_Browser {} {
+        label Model
+        callback {std::string val =fixLayoutString(o);
+modeloutput->value(val.c_str());
+modeloutput->redraw();}
+        tooltip {The type of keyboard} xywh {165 5 145 225} type Hold box FLAT_BOX selection_color 80
+        code0 {keyModelPopulate(o);}
+      }
+      Fl_Browser {} {
+        label Option
+        callback {std::string val =fixLayoutString(o);
+optionoutput->value(val.c_str());
+optionoutput->redraw();}
+        tooltip {Additional quirks} xywh {320 5 165 220} type Hold box FLAT_BOX selection_color 80
+        code0 {keyOptionPopulate(o);}
+      }
+      Fl_Input modeloutput {
+        xywh {165 245 150 25} box FLAT_BOX
+        code0 {o->value(getLayout(o,"model").c_str());}
+      }
+      Fl_Input optionoutput {
+        xywh {320 245 165 25} box FLAT_BOX
+      }
+    }
+  }
+  Function {make_window()} {open
+  } {
+    code {load();
+JWMVERSION=JWMversion();
+//Fl::add_handler(handle);} {}
+    Fl_Window keyboard_window {
+      label {Keyboard Settings} open
+      xywh {882 85 480 295} type Double color 31 hide resizable
+      code0 {startup(o,jsm_keyboard_xpm);} xclass {jsm-keyboard}
+    } {
+      Fl_Scroll {} {open
+        xywh {0 0 490 310} color 31 resizable
+      } {
+        Fl_Browser key_browser {
+          label {Keyboard Shortcuts}
+          xywh {5 20 470 235} type Hold box FLAT_BOX selection_color 80 labelfont 1 align 1
+          code1 {static int widths[] = {50,175,105,0};o->column_widths(widths);}
+          code2 {o->column_char(DELIM);}
+          code3 {populateFLBrowser2Attr(key_browser,"Key","mask","key",DELIM);}
+        }
+        Fl_Button {} {
+          label {-}
+          callback {remove_key(key_browser);}
+          xywh {50 260 35 30} box FLAT_BOX color 23 labelfont 1 labelsize 34
+        }
+        Fl_Button {} {
+          label Cancel
+          callback {cancel();}
+          xywh {355 260 65 30} box FLAT_BOX color 80 selection_color 81 labelcolor 7
+        }
+        Fl_Button {} {
+          label OK
+          callback {saveChanges();}
+          tooltip {Write to configuration file} xywh {430 260 45 30} box FLAT_BOX color 61 selection_color 59 labelcolor 55
+        }
+        Fl_Button {} {
+          label {@+}
+          callback {debug_out("+ callback");
+grabber_window()->show();}
+          xywh {5 260 40 30} box FLAT_BOX color 23
+        }
+        Fl_Button {} {
+          callback {if(checkFlBrowserItem(key_browser)){
+  debug_out("Configure callback");
+  config_key_win()->show();
+  if(!Configure(key_browser,action_name1,current_key,current_mod1,current_mod2,current_mod3,old_action)){debug_out("Configure failed");}
+}}
+          image {custom_buttons/gear16.png} xywh {100 260 30 30} box FLAT_BOX color 23 labelfont 1
+        }
+        Fl_Button {} {
+          label Layout
+          callback {layout_window()->show();}
+          image {custom_buttons/gear16.png} xywh {185 260 100 30} box FLAT_BOX color 23 labelfont 1 align 256
+        }
+      }
+    }
+  }
+  Function {menu_cb(const char* action)} {open
+  } {
+    code {action_name->value(action);} {}
+  }
+  Function {key_wait(Fl_Output* mod1,Fl_Output* mod2,Fl_Output* mod3,Fl_Output* KEY)} {open
+  } {
+    code {debug_out("key_wait(Fl_Output* mod1,Fl_Output* mod2,Fl_Output* mod3,Fl_Output* KEY)");
+Fl::add_handler(handle);
+//modified from the fltk keyboard example program
+while (Fl::wait()){
+  char buffer[100];
+  const char *keyname = buffer;
+  int k = Fl::event_key();
+  if (!k){keyname = "0";}
+  else if (k < 256){sprintf(buffer, "%c", k);}
+  else if (k > FL_F && k <= FL_F_Last){
+    sprintf(buffer, "F%d", k - FL_F);
+  }
+  else if (k >= FL_KP && k <= FL_KP_Last){
+    sprintf(buffer, "FL_KP+'%c'", k-FL_KP);
+  }
+  else if (k >= FL_Button && k <= FL_Button+7){
+    debug_out("Mouse Button");
+    keyname=NULL;
+  }
+  else {
+    sprintf(buffer, "0x%04x", k);
+    for (int i = 0; i < int(sizeof(table)/sizeof(*table)); i++){
+      if (table[i].n == k) {keyname = table[i].text; break;}
+    }
+  }
+  if(keyname!=NULL){
+    std::string tmp=keyname;
+    debug_out("Key input="+tmp);
+    if(tmp.compare("Control")==0){changemod("C",mod1,mod2,mod3);}
+    else if(tmp.compare("Alt")==0){changemod("A",mod1,mod2,mod3);}
+    else if(tmp.compare("Shift")==0){changemod("S",mod1,mod2,mod3);}
+    else if(tmp.compare("Meta")==0){changemod("4",mod1,mod2,mod3);}
+    else{
+      if(tmp.compare("")!=0){
+        KEY->value(keyname);
+        break;
+      }
+    }
+  }
+}} {}
+  }
+  Function {special_cb(const char* item, Fl_Output *o)} {open
+  } {
+    code {if(item!=NULL){
+  o->value(item);
+  o->redraw();
+}} {}
+  }
+}
+
+Function {handle(int e)} {open return_type int
+} {
+  code {if (e==FL_MOUSEWHEEL){
+ // roller_x->value( roller_x->value() + Fl::e_dx * roller_x->step() );
+ // roller_y->value( roller_y->value() + Fl::e_dy * roller_y->step() );
+  return 1;
+}
+return (e == FL_SHORTCUT);} {}
+}

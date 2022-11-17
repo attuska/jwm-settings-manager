@@ -1,0 +1,42 @@
+Source: jwm-settings-manager
+Section: misc
+Priority: optional
+Maintainer: Israel Dahl <israeldahl@gmail.com>
+Build-Depends:
+ debhelper (>= 9.0.0),
+ cmake,
+ gcc-multilib [amd64],
+ g++-multilib [amd64],
+ libc6,
+ libfltk-images1.3,
+ libfltk1.3,
+ libfltk1.3-dev,
+ libfltk1.3-compat-headers,
+ libgcc1,
+ libstdc++6,
+ libx11-dev,
+ libxpm-dev,
+ fluid,
+ pkg-config,
+Standards-Version: 3.9.7
+Homepage: http://torios.top
+
+Package: jwm-settings-manager
+Architecture: any
+Depends: jwm-settings-manager-common (>= ${source:Version}) , ${shlibs:Depends}, ${misc:Depends}, jwm, jwm-menu (>=2.0.0ubuntu1)| jwm-menu-all
+Replaces: jwm-menu (<= 1.0.1ubuntu3)
+Recommends:
+Suggests: volumeicon-alsa
+Description: JWM Settings Manager
+  A tool to easily configure JWM.  Built using nanosvg, pugixml and FLTK,
+   is fast, and light, but doesn't sacrifice aesthetics.
+
+Package: jwm-settings-manager-common
+Architecture: all
+Depends: ${misc:Depends}
+Description: JWM Settings Manager Common files
+  A tool to easily configure JWM.  Built using nanosvg, pugixml and FLTK,
+   is fast, and light, but doesn't sacrifice aesthetics.
+  .
+ This package contains the platform independent files like buttons,
+ and themes.

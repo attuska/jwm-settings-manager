@@ -1,0 +1,54 @@
+.TH jwm-settings-manager 1 "@DATE@" "version @VERSION@" "User Commands"
+.SH NAME
+@EXEC@ \- configure JWM easily
+
+.SH SYNOPSIS
+.B @NAME@
+[OPTIONS]
+.SH DESCTIPTION
+@SHORT_DESC@
+.PP
+@ONE_LINER@
+
+.SH OPTIONS
+.TP
+
+.TP
+\-a  @ARGautostart@   show autostart settings
+.TP
+\-d  @ARGdesktop@     show desktop settings
+.TP
+\-f  @ARGfont@        show font settings
+.TP
+\-h  @ARGhelp@        show this listing
+.TP
+\-i  @ARGicons@       show icon settings
+.TP
+\-k  @ARGkeyboard@    show keyboard settings
+.TP
+\-m  @ARGmouse@       show mouse settings
+.TP
+\-p  @ARGpanel@       show panel settings
+.TP
+\-t  @ARGthemes@      show theme settings
+.TP
+\-w  @ARGwindow@      show window settings
+.TP
+\-u  @ARGpopup@        show popups window
+.TP
+\-v  @ARGversion@     show version number
+.TP
+\-c  @ARGcopyright@   show copyright information
+.TP
+.B SHORTCUTS FOR USE IN THE PANELS AND MENUS
+.TP
+\-l  @ARGclock@        show clock settings
+.TP
+\-s  @ARGshortcuts@   show shortcuts window
+.TP
+\-u  @ARGmenu@        show menu window
+.TP
+\@ARGhalt@ @ARGshutdown@ show shutdown dialog
+
+.SH AUTHOR
+@AUTHOR@
